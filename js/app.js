@@ -17,13 +17,60 @@ map.fitBounds(L.latLngBounds([...ARRIVAL.map(x=>[x.lat,x.lng]),...TAPPE.map(x=>[
 
 const gmapsUrl=i=>`https://www.google.com/maps/dir/?api=1&destination=${i.lat},${i.lng}`;
 
-function openItem(item,isTourStop){
- const visited=isTourStop&&localStorage.getItem(`visited-${item.id}`)==='1';
- const audio=item.audio?`<div class="audio-box"><div class="audio-label">🎧 AUDIOGUIDA</div><audio controls preload="metadata"><source src="${item.audio}" type="audio/mpeg"></audio><div class="audio-missing">Se il file non è ancora presente, basta caricare l'MP3 nella cartella audio.</div></div>`:`<div class="audio-box"><div class="audio-label">🎧 AUDIOGUIDA</div><div class="audio-missing">Nessuna audioguida prevista per questo punto.</div></div>`;
- const transit=item.transit?`<div class="transit-box"><strong>🚇 Indicazione</strong><br>${item.transit}</div>`:'';
- document.getElementById('sheetContent').innerHTML=`<div class="hero"><img src="${item.image}" alt="${item.name}" onerror="this.remove();this.parentElement.textContent='FOTO PREDISPOSTA · ${item.name}'"></div><div class="sheet-body"><div class="kicker">${isTourStop?'TAPPA '+item.id:'TRASFERIMENTO'} · ${item.time}</div><div class="sheet-title">${item.name}</div><div class="sheet-text">${item.description}</div>${transit}${audio}<div class="actions"><a class="btn primary" target="_blank" rel="noopener" href="${gmapsUrl(item)}">🧭 Portami qui</a><button class="btn secondary" onclick="focusItem('${isTourStop?'stop':'arrival'}','${item.id}')">📍 Mostra in mappa</button>${isTourStop?`<button class="btn visited" onclick="toggleVisited(${item.id})">${visited?'✓ Visitato':'○ Segna come visitato'}</button>`:''}</div>${item.tip?`<div class="tip"><strong>Nota:</strong> ${item.tip}</div>`:''}</div>`;
- document.getElementById('sheetBackdrop').hidden=false;document.getElementById('detailSheet').classList.add('open');
+function audioKey(item,index){ return `audio-listened-${item.id}-${index}`; }
+
+function playlistHtml(item){
+ const audios=item.audios||[];
+ if(!audios.length) return `<div class="audio-box"><div class="audio-label">🎧 AUDIOGUIDA</div><div class="audio-missing">Nessuna audioguida prevista per questo punto.</div></div>`;
+
+ const rows=audios.map((a,i)=>{
+   const listened=localStorage.getItem(audioKey(item,i))==='1';
+   return `<button class="track-row ${listened?'listened':''}" onclick="selectTrack(${JSON.stringify(String(item.id))},${i})">
+      <span class="track-play">▶</span>
+      <span class="track-title">${a.title}</span>
+      <span class="track-state">${listened?'✓':''}</span>
+   </button>`;
+ }).join('');
+
+ return `<div class="audio-box">
+   <div class="audio-label">🎧 AUDIOGUIDA · ${audios.length} ${audios.length===1?'TRACCIA':'TRACCE'}</div>
+   <div class="playlist">${rows}</div>
+   <div id="activeTrackBox" class="active-track" hidden>
+      <div id="activeTrackTitle" class="active-track-title"></div>
+      <img id="activeTrackImage" class="active-track-image" hidden alt="">
+      <div id="activeTrackDescription" class="active-track-description"></div>
+      <audio id="mainAudioPlayer" controls preload="metadata"></audio>
+   </div>
+ </div>`;
 }
+
+let currentOpenItem=null;
+
+function openItem(item,isTourStop){
+ currentOpenItem={item,isTourStop};
+ const visited=isTourStop&&localStorage.getItem(`visited-${item.id}`)==='1';
+ const transit=item.transit?`<div class="transit-box"><strong>🚇 Indicazione</strong><br>${item.transit}</div>`:'';
+ document.getElementById('sheetContent').innerHTML=`<div class="hero"><img src="${item.image}" alt="${item.name}" onerror="this.remove();this.parentElement.textContent='FOTO PREDISPOSTA · ${item.name}'"></div><div class="sheet-body"><div class="kicker">${isTourStop?'TAPPA '+item.id:'TRASFERIMENTO'} · ${item.time}</div><div class="sheet-title">${item.name}</div><div class="sheet-text">${item.description}</div>${transit}${playlistHtml(item)}<div class="actions"><a class="btn primary" target="_blank" rel="noopener" href="${gmapsUrl(item)}">🧭 Portami qui</a><button class="btn secondary" onclick="focusItem('${isTourStop?'stop':'arrival'}','${item.id}')">📍 Mostra in mappa</button>${isTourStop?`<button class="btn visited" onclick="toggleVisited(${item.id})">${visited?'✓ Visitato':'○ Segna come visitato'}</button>`:''}</div>${item.tip?`<div class="tip"><strong>Nota:</strong> ${item.tip}</div>`:''}</div>`;
+ document.getElementById('sheetBackdrop').hidden=false;document.getElementById('detailSheet').classList.add('open');
+
+ if((item.audios||[]).length===1) setTimeout(()=>selectTrack(String(item.id),0),0);
+}
+
+function selectTrack(itemId,index){
+ if(!currentOpenItem || String(currentOpenItem.item.id)!==String(itemId)) return;
+ const item=currentOpenItem.item,a=item.audios[index];
+ const box=document.getElementById('activeTrackBox'),title=document.getElementById('activeTrackTitle'),desc=document.getElementById('activeTrackDescription'),img=document.getElementById('activeTrackImage'),player=document.getElementById('mainAudioPlayer');
+ box.hidden=false;title.textContent=a.title;desc.textContent=a.description||'';
+ if(a.image){img.src=a.image;img.alt=a.title;img.hidden=false;}else{img.hidden=true;img.removeAttribute('src');}
+ player.src=a.file;
+ player.onended=()=>{
+   localStorage.setItem(audioKey(item,index),'1');
+   openItem(item,currentOpenItem.isTourStop);
+   setTimeout(()=>selectTrack(String(item.id),index),0);
+ };
+ player.play().catch(()=>{});
+}
+
 function closeSheet(){document.getElementById('sheetBackdrop').hidden=true;document.getElementById('detailSheet').classList.remove('open');}
 function focusItem(type,id){const arr=type==='stop'?TAPPE:ARRIVAL,item=arr.find(x=>String(x.id)===String(id));closeSheet();switchView('mapView');setTimeout(()=>{map.invalidateSize();map.setView([item.lat,item.lng],16);markers.get(pointKey(type,id)).openTooltip();},100);}
 function toggleVisited(id){const k=`visited-${id}`,now=localStorage.getItem(k)==='1';localStorage.setItem(k,now?'0':'1');const item=TAPPE.find(x=>x.id===id);markers.get(pointKey('stop',id)).setIcon(iconFor(item,true));buildLists();openItem(item,true);}

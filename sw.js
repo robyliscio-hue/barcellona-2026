@@ -1,4 +1,4 @@
-const CACHE='barcellona-v2';const LOCAL=['./','./index.html','./css/style.css','./js/tappe.js','./js/app.js','./manifest.webmanifest','./img/icon.svg'];
+const CACHE='barcellona-v3';const LOCAL=['./','./index.html','./css/style.css','./js/audioguide.js','./js/tappe.js','./js/app.js','./manifest.webmanifest','./img/icon.svg'];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(LOCAL)))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==CACHE).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(fetch(e.request).then(r=>{const x=r.clone();caches.open(CACHE).then(c=>c.put(e.request,x)).catch(()=>{});return r}).catch(()=>caches.match(e.request)))})
