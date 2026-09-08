@@ -5,47 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#243782">
   <meta name="robots" content="noindex,nofollow,noarchive">
-  <title>Barcellona 2026 – Sabato</title>
-
+  <title>Barcellona 2026 – Sabato 19</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="img/icon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="topbar">
-    <div>
-      <div class="eyebrow">BARCELLONA · 19–21 SETTEMBRE 2026</div>
-      <h1>Sabato 19</h1>
-      <div class="subtitle">Camp Nou → Passeig de Gràcia → centro → mare</div>
+<header class="topbar">
+  <div>
+    <div class="eyebrow">BARCELLONA · 19–21 SETTEMBRE 2026</div>
+    <h1>Sabato 19</h1>
+    <div class="subtitle">Aeroporto → hotel → Camp Nou → centro → mare</div>
+  </div>
+  <button id="locateBtn" class="icon-btn" aria-label="Mostra la mia posizione">◎</button>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-view="mapView">Mappa</button>
+  <button class="tab" data-view="listView">Tappe</button>
+</nav>
+
+<main>
+  <section id="mapView" class="view active">
+    <div id="map"></div>
+    <div class="layer-panel">
+      <label><input type="checkbox" id="toggleRoute" checked> Percorso</label>
+      <label><input type="checkbox" id="toggleMetro" checked> Metro</label>
+      <label><input type="checkbox" id="toggleStops" checked> Tappe</label>
     </div>
-    <button id="locateBtn" class="icon-btn" aria-label="Mostra la mia posizione" title="Dove sono">◎</button>
-  </header>
+    <div class="map-note">Blu tratteggiato = a piedi · linee colorate = metro · verde = visitato</div>
+  </section>
 
-  <nav class="tabs" aria-label="Vista">
-    <button class="tab active" data-view="mapView">Mappa</button>
-    <button class="tab" data-view="listView">Tappe</button>
-  </nav>
+  <section id="listView" class="view">
+    <div class="section-title">ARRIVO A BARCELLONA</div>
+    <div id="arrivalList" class="stop-list compact"></div>
+    <div class="section-title">POMERIGGIO E SERA</div>
+    <div id="stopList" class="stop-list"></div>
+  </section>
+</main>
 
-  <main>
-    <section id="mapView" class="view active">
-      <div id="map"></div>
-      <div class="map-note">I marker indicano le tappe reali. Per la navigazione usa “Portami qui”.</div>
-    </section>
-
-    <section id="listView" class="view">
-      <div id="stopList" class="stop-list"></div>
-    </section>
-  </main>
-
-  <div id="sheetBackdrop" class="sheet-backdrop" hidden></div>
-  <aside id="detailSheet" class="detail-sheet" aria-hidden="true">
-    <button id="closeSheet" class="close-btn" aria-label="Chiudi">×</button>
-    <div id="sheetContent"></div>
-  </aside>
+<div id="sheetBackdrop" class="sheet-backdrop" hidden></div>
+<aside id="detailSheet" class="detail-sheet" aria-hidden="true">
+  <button id="closeSheet" class="close-btn">×</button>
+  <div id="sheetContent"></div>
+</aside>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="js/tappe.js"></script>
-  <script src="js/app.js"></script>
+<script src="js/tappe.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
