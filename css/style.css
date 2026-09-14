@@ -18,3 +18,6 @@ main{flex:1;min-height:0}.view{display:none;height:100%;overflow:auto}.view.acti
 .amenity-marker{width:34px;height:34px;border-radius:10px;background:#fff;border:2px solid #243782;box-shadow:0 2px 8px rgba(0,0,0,.28);display:grid;place-items:center;font-size:19px}
 .amenity-marker.wc{border-color:#4f657a}.amenity-marker.fastfood{border-color:#b36b00}.amenity-marker.restaurant{border-color:#8b3c3c}
 .amenity-popup{min-width:190px}.amenity-popup b{font-size:13px}.amenity-popup .small{font-size:11px;color:#687386;margin:4px 0}.amenity-popup a{display:inline-block;margin-top:5px;font-weight:800;color:#243782;text-decoration:none}
+
+.amenity-marker{width:38px;height:38px;font-size:21px}
+.amenity-popup b{font-size:14px}

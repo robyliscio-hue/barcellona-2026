@@ -216,33 +216,53 @@ const TRIP_DATA={
               2.07428
             ],
             [
-              41.3145,
-              2.071
+              41.3128,
+              2.073
             ],
             [
-              41.3265,
-              2.0755
+              41.3215,
+              2.0744
             ],
             [
-              41.339,
-              2.083
+              41.3308,
+              2.0788
             ],
             [
-              41.3505,
-              2.091
+              41.34,
+              2.084
             ],
             [
-              41.362,
-              2.099
+              41.35,
+              2.0915
             ],
             [
-              41.374,
-              2.106
+              41.3595,
+              2.0985
+            ],
+            [
+              41.369,
+              2.1045
+            ],
+            [
+              41.378,
+              2.1087
             ],
             [
               41.38572,
               2.11113
             ]
+          ],
+          "stations": [
+            {
+              "name": "Aeroport T2",
+              "lat": 41.30385,
+              "lng": 2.07428
+            },
+            {
+              "name": "Zona Universitaria",
+              "lat": 41.38572,
+              "lng": 2.11113
+            }
           ]
         },
         {
@@ -254,13 +274,46 @@ const TRIP_DATA={
               2.11113
             ],
             [
-              41.38775,
-              2.11711
+              41.386,
+              2.113
             ],
             [
-              41.38843,
-              2.12645
+              41.3867,
+              2.115
+            ],
+            [
+              41.38778,
+              2.11705
+            ],
+            [
+              41.3881,
+              2.12
+            ],
+            [
+              41.3883,
+              2.123
+            ],
+            [
+              41.38855,
+              2.1264
             ]
+          ],
+          "stations": [
+            {
+              "name": "Zona Universitaria",
+              "lat": 41.38572,
+              "lng": 2.11113
+            },
+            {
+              "name": "Palau Reial",
+              "lat": 41.38778,
+              "lng": 2.11705
+            },
+            {
+              "name": "Maria Cristina",
+              "lat": 41.38855,
+              "lng": 2.1264
+            }
           ]
         },
         {
@@ -268,53 +321,115 @@ const TRIP_DATA={
           "color": "#239b56",
           "coords": [
             [
-              41.38418,
-              2.13095
+              41.3842,
+              2.13093
             ],
             [
-              41.38133,
-              2.13583
+              41.3812,
+              2.13588
             ],
             [
-              41.37911,
-              2.14008
+              41.3791,
+              2.14005
             ],
             [
-              41.3784,
-              2.1454
+              41.37842,
+              2.14522
             ],
             [
-              41.37515,
-              2.14925
+              41.37512,
+              2.14932
             ],
             [
-              41.37415,
-              2.1592
+              41.3742,
+              2.15915
             ],
             [
-              41.37525,
+              41.37528,
               2.16845
             ],
             [
-              41.3768,
-              2.17505
+              41.37677,
+              2.17502
             ],
             [
-              41.38115,
-              2.17325
+              41.38122,
+              2.17318
             ],
             [
-              41.3863,
-              2.16965
+              41.38635,
+              2.16968
             ],
             [
-              41.3896,
-              2.1673
+              41.38955,
+              2.16735
             ],
             [
               41.39545,
-              2.16185
+              2.16188
             ]
+          ],
+          "stations": [
+            {
+              "name": "Les Corts",
+              "lat": 41.3842,
+              "lng": 2.13093
+            },
+            {
+              "name": "Placa del Centre",
+              "lat": 41.3812,
+              "lng": 2.13588
+            },
+            {
+              "name": "Sants Estacio",
+              "lat": 41.3791,
+              "lng": 2.14005
+            },
+            {
+              "name": "Tarragona",
+              "lat": 41.37842,
+              "lng": 2.14522
+            },
+            {
+              "name": "Espanya",
+              "lat": 41.37512,
+              "lng": 2.14932
+            },
+            {
+              "name": "Poble Sec",
+              "lat": 41.3742,
+              "lng": 2.15915
+            },
+            {
+              "name": "Parallel",
+              "lat": 41.37528,
+              "lng": 2.16845
+            },
+            {
+              "name": "Drassanes",
+              "lat": 41.37677,
+              "lng": 2.17502
+            },
+            {
+              "name": "Liceu",
+              "lat": 41.38122,
+              "lng": 2.17318
+            },
+            {
+              "name": "Catalunya",
+              "lat": 41.38635,
+              "lng": 2.16968
+            },
+            {
+              "name": "Passeig de Gracia",
+              "lat": 41.38955,
+              "lng": 2.16735
+            },
+            {
+              "name": "Diagonal",
+              "lat": 41.39545,
+              "lng": 2.16188
+            }
           ]
         },
         {
@@ -334,9 +449,31 @@ const TRIP_DATA={
               2.17415
             ],
             [
-              41.3896,
-              2.1673
+              41.38955,
+              2.16735
             ]
+          ],
+          "stations": [
+            {
+              "name": "Barceloneta",
+              "lat": 41.3824,
+              "lng": 2.1854
+            },
+            {
+              "name": "Jaume I",
+              "lat": 41.38357,
+              "lng": 2.1782
+            },
+            {
+              "name": "Urquinaona",
+              "lat": 41.38957,
+              "lng": 2.17415
+            },
+            {
+              "name": "Passeig de Gracia",
+              "lat": 41.38955,
+              "lng": 2.16735
+            }
           ]
         },
         {
@@ -344,53 +481,115 @@ const TRIP_DATA={
           "color": "#239b56",
           "coords": [
             [
-              41.3896,
-              2.1673
+              41.38955,
+              2.16735
             ],
             [
-              41.3863,
-              2.16965
+              41.38635,
+              2.16968
             ],
             [
-              41.38115,
-              2.17325
+              41.38122,
+              2.17318
             ],
             [
-              41.3768,
-              2.17505
+              41.37677,
+              2.17502
             ],
             [
-              41.37525,
+              41.37528,
               2.16845
             ],
             [
-              41.37415,
-              2.1592
+              41.3742,
+              2.15915
             ],
             [
-              41.37515,
-              2.14925
+              41.37512,
+              2.14932
             ],
             [
-              41.3784,
-              2.1454
+              41.37842,
+              2.14522
             ],
             [
-              41.37911,
-              2.14008
+              41.3791,
+              2.14005
             ],
             [
-              41.38133,
-              2.13583
+              41.3812,
+              2.13588
             ],
             [
-              41.38418,
-              2.13095
+              41.3842,
+              2.13093
             ],
             [
-              41.38843,
-              2.12645
+              41.38855,
+              2.1264
             ]
+          ],
+          "stations": [
+            {
+              "name": "Passeig de Gracia",
+              "lat": 41.38955,
+              "lng": 2.16735
+            },
+            {
+              "name": "Catalunya",
+              "lat": 41.38635,
+              "lng": 2.16968
+            },
+            {
+              "name": "Liceu",
+              "lat": 41.38122,
+              "lng": 2.17318
+            },
+            {
+              "name": "Drassanes",
+              "lat": 41.37677,
+              "lng": 2.17502
+            },
+            {
+              "name": "Parallel",
+              "lat": 41.37528,
+              "lng": 2.16845
+            },
+            {
+              "name": "Poble Sec",
+              "lat": 41.3742,
+              "lng": 2.15915
+            },
+            {
+              "name": "Espanya",
+              "lat": 41.37512,
+              "lng": 2.14932
+            },
+            {
+              "name": "Tarragona",
+              "lat": 41.37842,
+              "lng": 2.14522
+            },
+            {
+              "name": "Sants Estacio",
+              "lat": 41.3791,
+              "lng": 2.14005
+            },
+            {
+              "name": "Placa del Centre",
+              "lat": 41.3812,
+              "lng": 2.13588
+            },
+            {
+              "name": "Les Corts",
+              "lat": 41.3842,
+              "lng": 2.13093
+            },
+            {
+              "name": "Maria Cristina",
+              "lat": 41.38855,
+              "lng": 2.1264
+            }
           ]
         }
       ],
@@ -651,31 +850,34 @@ const TRIP_DATA={
           "id": "s-rincon",
           "type": "restaurant",
           "name": "El Rincon Tapas & Bar",
-          "lat": 41.3849,
-          "lng": 2.1282,
+          "lat": 41.38115,
+          "lng": 2.1241,
           "address": "Travessera de les Corts, 136, Barcelona",
-          "note": "PRANZO SABATO - prima scelta · €10-20",
-          "when": "14:00 circa"
+          "note": "PRANZO SABATO - prima scelta · Travessera de les Corts 136 · €10-20 · verificato",
+          "when": "14:00 circa",
+          "verified": true
         },
         {
           "id": "s-donsand",
           "type": "restaurant",
           "name": "Don Sandwich Cafeteria",
-          "lat": 41.3835,
-          "lng": 2.1264,
+          "lat": 41.38265,
+          "lng": 2.1271,
           "address": "Carrer de Figols, 38, Barcelona",
-          "note": "PRANZO SABATO - backup rapido",
-          "when": "14:00 circa"
+          "note": "PRANZO SABATO - backup · Carrer de Figols 38 · €10-20 · verificato",
+          "when": "14:00 circa",
+          "verified": true
         },
         {
           "id": "s-mcd",
           "type": "fastfood",
           "name": "McDonald's Passeig de Gracia",
-          "lat": 41.39115,
-          "lng": 2.16585,
+          "lat": 41.39188450233682,
+          "lng": 2.1657942607966985,
           "address": "Passeig de Gracia, 48, Barcelona",
           "note": "FAST FOOD concordato - sul percorso Pedrera -> Casa Batllo -> Catalunya · €1-10",
-          "when": "backup"
+          "when": "backup",
+          "verified": true
         },
         {
           "id": "s-five",
@@ -685,7 +887,8 @@ const TRIP_DATA={
           "lng": 2.1681,
           "address": "Passeig de Gracia, 28, Barcelona",
           "note": "FAST FOOD concordato · €10-20",
-          "when": "backup"
+          "when": "backup",
+          "verified": true
         },
         {
           "id": "s-bk",
@@ -695,7 +898,8 @@ const TRIP_DATA={
           "lng": 2.16625,
           "address": "Carrer d'Arago, 259, Barcelona",
           "note": "FAST FOOD concordato - backup zona Casa Batllo · €10-20",
-          "when": "backup"
+          "when": "backup",
+          "verified": true
         },
         {
           "id": "s-taberna",
@@ -705,7 +909,8 @@ const TRIP_DATA={
           "lng": 2.1892,
           "address": "Carrer d'Andrea Doria, 27, Barcelona",
           "note": "CENA SABATO - prima scelta · €10-20",
-          "when": "21:00 circa"
+          "when": "21:00 circa",
+          "verified": true
         },
         {
           "id": "wc-plapalau-s",
@@ -891,17 +1096,34 @@ const TRIP_DATA={
           "color": "#239b56",
           "coords": [
             [
-              41.38418,
-              2.13095
+              41.3842,
+              2.13093
             ],
             [
-              41.38133,
-              2.13583
+              41.3812,
+              2.13588
             ],
             [
-              41.37911,
-              2.14008
+              41.3791,
+              2.14005
             ]
+          ],
+          "stations": [
+            {
+              "name": "Les Corts",
+              "lat": 41.3842,
+              "lng": 2.13093
+            },
+            {
+              "name": "Placa del Centre",
+              "lat": 41.3812,
+              "lng": 2.13588
+            },
+            {
+              "name": "Sants Estacio",
+              "lat": 41.3791,
+              "lng": 2.14005
+            }
           ]
         },
         {
@@ -909,33 +1131,53 @@ const TRIP_DATA={
           "color": "#2f63b6",
           "coords": [
             [
-              41.37911,
-              2.14008
+              41.3791,
+              2.14005
             ],
             [
-              41.383,
-              2.148
+              41.381,
+              2.1445
             ],
             [
-              41.3875,
-              2.1537
+              41.3837,
+              2.149
             ],
             [
-              41.3917,
-              2.1586
+              41.387,
+              2.153
             ],
             [
-              41.3955,
-              2.164
+              41.3905,
+              2.157
             ],
             [
-              41.3995,
-              2.169
+              41.394,
+              2.161
+            ],
+            [
+              41.397,
+              2.1655
+            ],
+            [
+              41.4,
+              2.17
             ],
             [
               41.40363,
               2.17436
             ]
+          ],
+          "stations": [
+            {
+              "name": "Sants Estacio",
+              "lat": 41.3791,
+              "lng": 2.14005
+            },
+            {
+              "name": "Sagrada Familia",
+              "lat": 41.40363,
+              "lng": 2.17436
+            }
           ]
         },
         {
@@ -950,6 +1192,18 @@ const TRIP_DATA={
               41.40052,
               2.17937
             ]
+          ],
+          "stations": [
+            {
+              "name": "Sagrada Familia",
+              "lat": 41.40363,
+              "lng": 2.17436
+            },
+            {
+              "name": "Monumental",
+              "lat": 41.40052,
+              "lng": 2.17937
+            }
           ]
         },
         {
@@ -961,13 +1215,29 @@ const TRIP_DATA={
               2.17937
             ],
             [
-              41.404,
-              2.1832
+              41.403,
+              2.182
             ],
             [
-              41.40835,
-              2.18715
+              41.4057,
+              2.1845
+            ],
+            [
+              41.40825,
+              2.18708
             ]
+          ],
+          "stations": [
+            {
+              "name": "Monumental",
+              "lat": 41.40052,
+              "lng": 2.17937
+            },
+            {
+              "name": "Clot",
+              "lat": 41.40825,
+              "lng": 2.18708
+            }
           ]
         },
         {
@@ -975,13 +1245,25 @@ const TRIP_DATA={
           "color": "#d71920",
           "coords": [
             [
-              41.40835,
-              2.18715
+              41.40825,
+              2.18708
             ],
             [
               41.40399,
               2.18789
             ]
+          ],
+          "stations": [
+            {
+              "name": "Clot",
+              "lat": 41.40825,
+              "lng": 2.18708
+            },
+            {
+              "name": "Glories",
+              "lat": 41.40399,
+              "lng": 2.18789
+            }
           ]
         },
         {
@@ -993,25 +1275,42 @@ const TRIP_DATA={
               2.18789
             ],
             [
-              41.4005,
-              2.1857
+              41.4015,
+              2.186
             ],
             [
-              41.396,
-              2.183
+              41.3985,
+              2.184
+            ],
+            [
+              41.395,
+              2.1822
             ],
             [
               41.39105,
               2.18069
             ],
             [
-              41.39,
-              2.176
-            ],
-            [
               41.38957,
               2.17415
             ]
+          ],
+          "stations": [
+            {
+              "name": "Glories",
+              "lat": 41.40399,
+              "lng": 2.18789
+            },
+            {
+              "name": "Arc de Triomf",
+              "lat": 41.39105,
+              "lng": 2.18069
+            },
+            {
+              "name": "Urquinaona",
+              "lat": 41.38957,
+              "lng": 2.17415
+            }
           ]
         },
         {
@@ -1026,6 +1325,18 @@ const TRIP_DATA={
               41.38357,
               2.1782
             ]
+          ],
+          "stations": [
+            {
+              "name": "Urquinaona",
+              "lat": 41.38957,
+              "lng": 2.17415
+            },
+            {
+              "name": "Jaume I",
+              "lat": 41.38357,
+              "lng": 2.1782
+            }
           ]
         },
         {
@@ -1040,6 +1351,18 @@ const TRIP_DATA={
               41.38957,
               2.17415
             ]
+          ],
+          "stations": [
+            {
+              "name": "Jaume I",
+              "lat": 41.38357,
+              "lng": 2.1782
+            },
+            {
+              "name": "Urquinaona",
+              "lat": 41.38957,
+              "lng": 2.17415
+            }
           ]
         },
         {
@@ -1054,6 +1377,18 @@ const TRIP_DATA={
               41.39105,
               2.18069
             ]
+          ],
+          "stations": [
+            {
+              "name": "Urquinaona",
+              "lat": 41.38957,
+              "lng": 2.17415
+            },
+            {
+              "name": "Arc de Triomf",
+              "lat": 41.39105,
+              "lng": 2.18069
+            }
           ]
         },
         {
@@ -1073,9 +1408,31 @@ const TRIP_DATA={
               2.17415
             ],
             [
-              41.3896,
-              2.1673
+              41.38955,
+              2.16735
             ]
+          ],
+          "stations": [
+            {
+              "name": "Barceloneta",
+              "lat": 41.3824,
+              "lng": 2.1854
+            },
+            {
+              "name": "Jaume I",
+              "lat": 41.38357,
+              "lng": 2.1782
+            },
+            {
+              "name": "Urquinaona",
+              "lat": 41.38957,
+              "lng": 2.17415
+            },
+            {
+              "name": "Passeig de Gracia",
+              "lat": 41.38955,
+              "lng": 2.16735
+            }
           ]
         },
         {
@@ -1083,53 +1440,115 @@ const TRIP_DATA={
           "color": "#239b56",
           "coords": [
             [
-              41.3896,
-              2.1673
+              41.38955,
+              2.16735
             ],
             [
-              41.3863,
-              2.16965
+              41.38635,
+              2.16968
             ],
             [
-              41.38115,
-              2.17325
+              41.38122,
+              2.17318
             ],
             [
-              41.3768,
-              2.17505
+              41.37677,
+              2.17502
             ],
             [
-              41.37525,
+              41.37528,
               2.16845
             ],
             [
-              41.37415,
-              2.1592
+              41.3742,
+              2.15915
             ],
             [
-              41.37515,
-              2.14925
+              41.37512,
+              2.14932
             ],
             [
-              41.3784,
-              2.1454
+              41.37842,
+              2.14522
             ],
             [
-              41.37911,
-              2.14008
+              41.3791,
+              2.14005
             ],
             [
-              41.38133,
-              2.13583
+              41.3812,
+              2.13588
             ],
             [
-              41.38418,
-              2.13095
+              41.3842,
+              2.13093
             ],
             [
-              41.38843,
-              2.12645
+              41.38855,
+              2.1264
             ]
+          ],
+          "stations": [
+            {
+              "name": "Passeig de Gracia",
+              "lat": 41.38955,
+              "lng": 2.16735
+            },
+            {
+              "name": "Catalunya",
+              "lat": 41.38635,
+              "lng": 2.16968
+            },
+            {
+              "name": "Liceu",
+              "lat": 41.38122,
+              "lng": 2.17318
+            },
+            {
+              "name": "Drassanes",
+              "lat": 41.37677,
+              "lng": 2.17502
+            },
+            {
+              "name": "Parallel",
+              "lat": 41.37528,
+              "lng": 2.16845
+            },
+            {
+              "name": "Poble Sec",
+              "lat": 41.3742,
+              "lng": 2.15915
+            },
+            {
+              "name": "Espanya",
+              "lat": 41.37512,
+              "lng": 2.14932
+            },
+            {
+              "name": "Tarragona",
+              "lat": 41.37842,
+              "lng": 2.14522
+            },
+            {
+              "name": "Sants Estacio",
+              "lat": 41.3791,
+              "lng": 2.14005
+            },
+            {
+              "name": "Placa del Centre",
+              "lat": 41.3812,
+              "lng": 2.13588
+            },
+            {
+              "name": "Les Corts",
+              "lat": 41.3842,
+              "lng": 2.13093
+            },
+            {
+              "name": "Maria Cristina",
+              "lat": 41.38855,
+              "lng": 2.1264
+            }
           ]
         }
       ],
@@ -1344,11 +1763,12 @@ const TRIP_DATA={
           "id": "d-taperia",
           "type": "restaurant",
           "name": "La Taperia Barcelona",
-          "lat": 41.38365,
-          "lng": 2.17775,
+          "lat": 41.38371,
+          "lng": 2.17857,
           "address": "Placa de l'Angel, 5, Barcelona",
-          "note": "PRANZO DOMENICA - prima scelta · €10-20",
-          "when": "12:15-13:05"
+          "note": "PRANZO DOMENICA - prima scelta · Placa de l'Angel 5 · €10-20 · posizione verificata",
+          "when": "12:15-13:05",
+          "verified": true
         },
         {
           "id": "d-100m",
@@ -1358,7 +1778,8 @@ const TRIP_DATA={
           "lng": 2.1741,
           "address": "Placa d'Urquinaona, 1, Barcelona",
           "note": "FAST FOOD SPAGNOLO concordato - facoltativo, direttamente sulla direttrice · €1-10",
-          "when": "dopo Cattedrale"
+          "when": "dopo Cattedrale",
+          "verified": true
         },
         {
           "id": "d-taberna",
@@ -1368,7 +1789,8 @@ const TRIP_DATA={
           "lng": 2.1892,
           "address": "Carrer d'Andrea Doria, 27, Barcelona",
           "note": "CENA DOMENICA - prima scelta · €10-20",
-          "when": "20:30 circa"
+          "when": "20:30 circa",
+          "verified": true
         },
         {
           "id": "d-samsara",
@@ -1378,7 +1800,8 @@ const TRIP_DATA={
           "lng": 2.1885,
           "address": "Carrer de Guitert, 58, Barcelona",
           "note": "CENA DOMENICA - backup · €10-20",
-          "when": "backup"
+          "when": "backup",
+          "verified": true
         },
         {
           "id": "wc-ciuta",
@@ -1475,32 +1898,52 @@ const TRIP_DATA={
             ],
             [
               41.37,
-              2.111
+              2.112
             ],
             [
-              41.361,
-              2.101
+              41.363,
+              2.104
             ],
             [
-              41.35,
-              2.091
+              41.355,
+              2.096
             ],
             [
-              41.339,
-              2.083
+              41.346,
+              2.0885
             ],
             [
-              41.3265,
-              2.0755
+              41.337,
+              2.0815
             ],
             [
-              41.3145,
-              2.071
+              41.328,
+              2.0765
+            ],
+            [
+              41.319,
+              2.0735
+            ],
+            [
+              41.3105,
+              2.073
             ],
             [
               41.30385,
               2.07428
             ]
+          ],
+          "stations": [
+            {
+              "name": "Collblanc",
+              "lat": 41.37575,
+              "lng": 2.1191
+            },
+            {
+              "name": "Aeroport T2",
+              "lat": 41.30385,
+              "lng": 2.07428
+            }
           ]
         }
       ],
@@ -1529,7 +1972,8 @@ const TRIP_DATA={
           "lng": 2.1197,
           "address": "Collblanc, Barcelona",
           "note": "Punto opzionale: NON e una sosta prevista dalla guida. Usare solo se serve prima della L9 Sud.",
-          "when": "eventuale"
+          "when": "eventuale",
+          "verified": false
         },
         {
           "id": "l-fast-t2",
@@ -1539,7 +1983,8 @@ const TRIP_DATA={
           "lng": 2.07428,
           "address": "Barcelona El Prat Airport Terminal 2",
           "note": "Opzione pratica dopo l'arrivo al Terminal 2; scelta sul posto.",
-          "when": "prima del volo"
+          "when": "prima del volo",
+          "verified": false
         },
         {
           "id": "wc-airport",
