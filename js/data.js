@@ -36,8 +36,8 @@ const TRIP_DATA={
           "icon": "M",
           "name": "Maria Cristina",
           "time": "circa 14:00",
-          "lat": 41.3884,
-          "lng": 2.12631,
+          "lat": 41.3863149,
+          "lng": 2.1293222,
           "description": "Arrivo nella zona dell'hotel. Da qui pranzo economico, piccola spesa e poi check-in.",
           "transit": "A piedi nella zona Les Corts.",
           "cost": "TRASPORTO"
