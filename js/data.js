@@ -4,7 +4,7 @@ const TRIP_DATA={
       "id": "sabato",
       "label": "Sab 19",
       "title": "Sabato 19 settembre",
-      "subtitle": "Arrivo, Gaudi, centro storico e mare",
+      "subtitle": "Arrivo, Gaudi, Rambla lineare, Gotic, Born e mare",
       "stops": [
         {
           "id": "s-airport",
@@ -114,45 +114,66 @@ const TRIP_DATA={
           "time": "17:30/17:45",
           "lat": 41.38011,
           "lng": 2.17524,
-          "description": "Deviazione dalla Rambla verso Placa Reial, poi ingresso nel Barri Gotic.",
+          "description": "Deviazione dalla Rambla verso Placa Reial. Dopo la visita si torna sulla Rambla e si continua verso il mare: il Gotic viene visitato solo dopo Colombo e il Port Vell.",
           "cost": "GRATIS",
           "audios": "reial"
         },
         {
-          "id": "s-gotic",
+          "id": "s-colombo",
           "n": 7,
+          "name": "Monumento a Colombo",
+          "time": "circa 18:00",
+          "lat": 41.37625,
+          "lng": 2.17734,
+          "description": "Fine della Rambla. Da qui si entra nel Port Vell e si prosegue verso Moll de la Fusta.",
+          "cost": "GRATIS - esterno",
+          "audios": "portvell"
+        },
+        {
+          "id": "s-portvell-in",
+          "n": 8,
+          "name": "Port Vell - ingresso da Colombo",
+          "time": "18:00/18:15",
+          "lat": 41.3778,
+          "lng": 2.18105,
+          "description": "Dal Monumento a Colombo si entra nel Port Vell e si percorre il tratto iniziale verso Moll de la Fusta, prima di risalire nel Barri Gotic.",
+          "cost": "GRATIS"
+        },
+        {
+          "id": "s-gotic",
+          "n": 9,
           "name": "Barri Gotic",
-          "time": "17:45-18:15",
+          "time": "18:15 circa",
           "lat": 41.38255,
           "lng": 2.17731,
-          "description": "Passeggiata nel Gotic passando per Placa Sant Jaume e puntando verso El Born, senza deviazione alla Cattedrale.",
+          "description": "Dal Port Vell si risale nel Barri Gotic, usando Placa Sant Jaume come riferimento e senza deviazioni verso la Cattedrale. Si prosegue poi verso Carrer de la Princesa / El Born.",
           "cost": "GRATIS",
           "audios": "gotic"
         },
         {
           "id": "s-born",
-          "n": 8,
+          "n": 10,
           "name": "El Born - Santa Maria del Mar",
-          "time": "18:15/18:30",
+          "time": "18:45 circa",
           "lat": 41.38385,
           "lng": 2.18209,
-          "description": "Passaggio nel Born e davanti a Santa Maria del Mar, poi discesa verso il porto.",
+          "description": "Attraversamento del Born con passaggio davanti a Santa Maria del Mar. Da qui si scende verso Passeig d'Isabel II sul lato corretto del Port Vell.",
           "cost": "GRATIS - esterno"
         },
         {
-          "id": "s-portvell",
-          "n": 9,
-          "name": "Port Vell e Monumento a Colombo",
-          "time": "circa 19:00",
-          "lat": 41.37724,
-          "lng": 2.17589,
-          "description": "Passeggiata sul porto verso Passeig de Joan de Borbo e Barceloneta.",
-          "cost": "GRATIS - percorso esterno",
+          "id": "s-portvell-out",
+          "n": 11,
+          "name": "Port Vell - verso Barceloneta",
+          "time": "19:00 circa",
+          "lat": 41.3812,
+          "lng": 2.1854,
+          "description": "Da Santa Maria del Mar si rientra sul Port Vell gia sul lato corretto e si continua verso Passeig de Joan de Borbo, senza tornare a Colombo.",
+          "cost": "GRATIS",
           "audios": "portvell"
         },
         {
           "id": "s-barceloneta",
-          "n": 10,
+          "n": 12,
           "name": "Barceloneta e spiaggia",
           "time": "19:30/20:00 -> sera",
           "lat": 41.37895,
@@ -352,12 +373,34 @@ const TRIP_DATA={
             2.17005
           ],
           [
+            41.3842,
+            2.1711
+          ],
+          [
             41.38174,
             2.17158
           ],
           [
             41.38011,
             2.17524
+          ],
+          [
+            41.37625,
+            2.17734
+          ]
+        ],
+        [
+          [
+            41.37625,
+            2.17734
+          ],
+          [
+            41.3778,
+            2.18105
+          ],
+          [
+            41.3812,
+            2.1806
           ],
           [
             41.38255,
@@ -368,12 +411,8 @@ const TRIP_DATA={
             2.18209
           ],
           [
-            41.3802,
-            2.1813
-          ],
-          [
-            41.37724,
-            2.17589
+            41.3812,
+            2.1854
           ],
           [
             41.3794,
@@ -410,59 +449,69 @@ const TRIP_DATA={
       "id": "domenica",
       "label": "Dom 20",
       "title": "Domenica 20 settembre",
-      "subtitle": "Park Guell, Sagrada, Cattedrale, Ciutadella e mare",
+      "subtitle": "Sagrada, Monumental, Glories, Cattedrale, Ciutadella e mare",
       "stops": [
         {
           "id": "d-hotel",
           "kind": "hotel",
           "icon": "H",
           "name": "Hotel - partenza",
-          "time": "08:20/08:30",
+          "time": "08:45/09:00",
           "lat": 41.38605,
           "lng": 2.12743,
-          "description": "Partenza verso Maria Cristina L3.",
+          "description": "Dopo colazione si raggiunge Les Corts L3 per iniziare la mattina.",
           "cost": "HOTEL"
         },
         {
-          "id": "d-park",
-          "n": 1,
-          "name": "Park Guell",
-          "time": "09:30-11:00",
-          "lat": 41.41449,
-          "lng": 2.15269,
-          "description": "Piano A: visita interna come unico ingresso extra. Da Lesseps circa 20 minuti a piedi.",
-          "cost": "A PAGAMENTO - Piano A"
-        },
-        {
           "id": "d-sagrada",
-          "n": 2,
+          "n": 1,
           "name": "Sagrada Familia",
-          "time": "11:45-12:30",
+          "time": "09:30-10:15",
           "lat": 41.40363,
           "lng": 2.17436,
-          "description": "Visita esterna di circa 40-45 minuti, salvo eventuale scelta come unico ingresso extra al posto del Park Guell.",
-          "cost": "GRATIS - esterno / alternativa a pagamento",
+          "description": "Visita esterna di circa 40-45 minuti con la nostra audioguida, partendo dalla facciata della Nativita e percorrendo il perimetro.",
+          "cost": "GRATIS - esterno",
           "audios": "sagrada"
+        },
+        {
+          "id": "d-monumental",
+          "n": 2,
+          "name": "La Monumental",
+          "time": "10:25-10:45",
+          "lat": 41.40052,
+          "lng": 2.17937,
+          "description": "Breve sosta esterna di circa 15-20 minuti all'ex arena monumentale. Nessun ingresso previsto.",
+          "cost": "GRATIS - esterno"
+        },
+        {
+          "id": "d-glories",
+          "n": 3,
+          "name": "Placa de les Glories - Torre Glories - Disseny Hub",
+          "time": "11:05-11:50",
+          "lat": 41.40399,
+          "lng": 2.18789,
+          "description": "Blocco dedicato alla Barcellona contemporanea: Torre Glories, Placa de les Glories e Disseny Hub, tutti dall'esterno.",
+          "cost": "GRATIS - esterni"
         },
         {
           "id": "d-jaume",
           "kind": "metro",
           "icon": "M",
-          "name": "Jaume I",
-          "time": "12:55 circa",
+          "name": "Jaume I - zona pranzo",
+          "time": "12:15 circa",
           "lat": 41.38357,
           "lng": 2.1782,
-          "description": "Arrivo nel Gotic per pranzo rapido e Cattedrale.",
+          "description": "Arrivo diretto nella zona del pranzo e della Cattedrale.",
           "cost": "TRASPORTO"
         },
         {
           "id": "d-cattedrale",
-          "n": 3,
+          "n": 4,
           "name": "Cattedrale di Barcellona",
           "time": "14:00",
           "lat": 41.38396,
           "lng": 2.1762,
-          "description": "Prenotazione confermata. Visita interna prevista per circa 60-75 minuti. Per l'interno usate l'audioguida ufficiale; qui conserviamo le tracce introduttive create per l'arrivo.",
+          "description": "Prenotazione confermata. Arrivo davanti all'ingresso entro le 13:30-13:40; visita interna prevista per circa 60-75 minuti.",
           "cost": "A PAGAMENTO - prenotata",
           "audios": "cattedrale"
         },
@@ -474,23 +523,23 @@ const TRIP_DATA={
           "time": "15:20 circa",
           "lat": 41.38957,
           "lng": 2.17415,
-          "description": "Una fermata L4 da Jaume I. Eventuale sosta 100 Montaditos, poi cambio L1.",
+          "description": "Una fermata L4 da Jaume I; eventuale sosta rapida a 100 Montaditos, poi cambio L1.",
           "cost": "TRASPORTO"
         },
         {
           "id": "d-arc",
-          "n": 4,
+          "n": 5,
           "name": "Arc de Triomf",
           "time": "15:35/15:45",
           "lat": 41.39105,
           "lng": 2.18069,
-          "description": "Foto e inizio della passeggiata lungo Passeig de Lluis Companys verso Ciutadella.",
+          "description": "Foto all'Arc de Triomf e inizio della passeggiata lungo Passeig de Lluis Companys verso Ciutadella.",
           "cost": "GRATIS",
           "audios": "arc"
         },
         {
           "id": "d-ciutadella",
-          "n": 5,
+          "n": 6,
           "name": "Parc de la Ciutadella",
           "time": "16:00 circa",
           "lat": 41.38812,
@@ -501,7 +550,7 @@ const TRIP_DATA={
         },
         {
           "id": "d-portolimpic",
-          "n": 6,
+          "n": 7,
           "name": "Port Olimpic",
           "time": "16:45/17:00",
           "lat": 41.3852,
@@ -511,17 +560,17 @@ const TRIP_DATA={
         },
         {
           "id": "d-nova",
-          "n": 7,
+          "n": 8,
           "name": "Platja de Nova Icaria",
           "time": "17:00-20:00",
           "lat": 41.39022,
           "lng": 2.20335,
-          "description": "Blocco mare e spiaggia: circa tre ore se meteo e condizioni del mare sono favorevoli.",
+          "description": "Blocco mare e spiaggia di circa tre ore, se meteo e condizioni del mare lo permettono.",
           "cost": "GRATIS"
         },
         {
           "id": "d-barceloneta",
-          "n": 8,
+          "n": 9,
           "name": "Barceloneta",
           "time": "20:00 -> sera",
           "lat": 41.37895,
@@ -544,103 +593,115 @@ const TRIP_DATA={
       ],
       "metro": [
         {
-          "name": "L3 - Maria Cristina -> Lesseps",
+          "name": "L3 - Les Corts -> Sants Estacio",
           "color": "#239b56",
           "coords": [
             [
-              41.3884,
-              2.1263
+              41.3833,
+              2.1278
             ],
             [
-              41.3902,
-              2.1369
-            ],
-            [
-              41.3922,
-              2.1455
-            ],
-            [
-              41.3957,
-              2.1605
-            ],
-            [
-              41.401,
-              2.1637
-            ],
-            [
-              41.4065,
-              2.1587
+              41.3791,
+              2.14
             ]
           ]
         },
         {
-          "name": "L3 - Lesseps -> Diagonal",
-          "color": "#239b56",
-          "coords": [
-            [
-              41.4065,
-              2.1587
-            ],
-            [
-              41.401,
-              2.1637
-            ],
-            [
-              41.3957,
-              2.1605
-            ]
-          ]
-        },
-        {
-          "name": "L5 - Diagonal -> Sagrada Familia",
+          "name": "L5 - Sants Estacio -> Sagrada Familia",
           "color": "#2f63b6",
           "coords": [
             [
-              41.3957,
-              2.1605
+              41.3791,
+              2.14
             ],
             [
-              41.3985,
-              2.167
+              41.3879,
+              2.1495
             ],
             [
-              41.4036,
-              2.1744
+              41.3955,
+              2.1587
+            ],
+            [
+              41.40363,
+              2.17436
             ]
           ]
         },
         {
-          "name": "L5 - Sagrada Familia -> Verdaguer",
-          "color": "#2f63b6",
+          "name": "L2 - Sagrada Familia -> Monumental",
+          "color": "#8b5ca8",
           "coords": [
             [
-              41.4036,
-              2.1744
+              41.40363,
+              2.17436
             ],
             [
-              41.3994,
-              2.1685
+              41.40052,
+              2.17937
             ]
           ]
         },
         {
-          "name": "L4 - Verdaguer -> Jaume I",
+          "name": "L2 - Monumental -> Clot",
+          "color": "#8b5ca8",
+          "coords": [
+            [
+              41.40052,
+              2.17937
+            ],
+            [
+              41.4072,
+              2.187
+            ]
+          ]
+        },
+        {
+          "name": "L1 - Clot -> Glories",
+          "color": "#d71920",
+          "coords": [
+            [
+              41.4072,
+              2.187
+            ],
+            [
+              41.40399,
+              2.18789
+            ]
+          ]
+        },
+        {
+          "name": "L1 - Glories -> Urquinaona",
+          "color": "#d71920",
+          "coords": [
+            [
+              41.40399,
+              2.18789
+            ],
+            [
+              41.398,
+              2.185
+            ],
+            [
+              41.39105,
+              2.18069
+            ],
+            [
+              41.38957,
+              2.17415
+            ]
+          ]
+        },
+        {
+          "name": "L4 - Urquinaona -> Jaume I",
           "color": "#f2c500",
           "coords": [
             [
-              41.3994,
-              2.1685
+              41.38957,
+              2.17415
             ],
             [
-              41.3931,
-              2.1714
-            ],
-            [
-              41.3895,
-              2.1742
-            ],
-            [
-              41.3836,
+              41.38357,
               2.1782
             ]
           ]
@@ -650,12 +711,12 @@ const TRIP_DATA={
           "color": "#f2c500",
           "coords": [
             [
-              41.3836,
+              41.38357,
               2.1782
             ],
             [
-              41.3895,
-              2.1742
+              41.38957,
+              2.17415
             ]
           ]
         },
@@ -664,12 +725,12 @@ const TRIP_DATA={
           "color": "#d71920",
           "coords": [
             [
-              41.3895,
-              2.1742
+              41.38957,
+              2.17415
             ],
             [
-              41.391,
-              2.1807
+              41.39105,
+              2.18069
             ]
           ]
         },
@@ -729,22 +790,8 @@ const TRIP_DATA={
             2.12743
           ],
           [
-            41.3884,
-            2.1263
-          ]
-        ],
-        [
-          [
-            41.4065,
-            2.1587
-          ],
-          [
-            41.41449,
-            2.15269
-          ],
-          [
-            41.4065,
-            2.1587
+            41.3833,
+            2.1278
           ]
         ],
         [
@@ -753,8 +800,22 @@ const TRIP_DATA={
             2.17436
           ],
           [
-            41.4036,
-            2.1744
+            41.40052,
+            2.17937
+          ]
+        ],
+        [
+          [
+            41.40399,
+            2.18789
+          ],
+          [
+            41.4035,
+            2.1865
+          ],
+          [
+            41.4028,
+            2.188
           ]
         ],
         [
@@ -765,6 +826,12 @@ const TRIP_DATA={
           [
             41.38396,
             2.1762
+          ]
+        ],
+        [
+          [
+            41.38396,
+            2.1762
           ],
           [
             41.38357,
@@ -772,10 +839,6 @@ const TRIP_DATA={
           ]
         ],
         [
-          [
-            41.38957,
-            2.17415
-          ],
           [
             41.39105,
             2.18069
@@ -827,7 +890,7 @@ const TRIP_DATA={
       "id": "lunedi",
       "label": "Lun 21",
       "title": "Lunedi 21 settembre",
-      "subtitle": "Check-out, Camp Nou e aeroporto",
+      "subtitle": "Check-out, Camp Nou esterno e aeroporto",
       "stops": [
         {
           "id": "l-hotel",

@@ -1,15 +1,10 @@
-# Barcellona 2026 - sito definitivo
+# Barcellona 2026 - mappa interattiva aggiornata
 
-Versione costruita sul piano definitivo 19-21 settembre 2026.
+Allineata alla guida SABATO_LINEARE.
 
-Funzioni:
-- 3 giornate selezionabili;
-- linee metro e tratti a piedi separati;
-- rientro in hotel sabato e domenica;
-- lunedi Camp Nou -> Collblanc -> Aeroport T2;
-- playlist audioguide con un solo player;
-- stato ascoltata e visitato salvato sul dispositivo;
-- audioguide extra conservate in una sezione separata;
-- nomi audio normalizzati per GitHub Pages.
-
-Caricare il CONTENUTO di questa cartella nella root del repository GitHub Pages.
+- Sabato: Rambla -> Plaça Reial -> Colombo -> Port Vell -> Gotic -> Born/Santa Maria del Mar -> Port Vell -> Barceloneta.
+- Domenica: Park Güell eliminato; Sagrada -> La Monumental -> Glòries/Torre Glòries/Disseny Hub -> Jaume I/pranzo -> Cattedrale -> Arc de Triomf -> Ciutadella -> mare.
+- Metro domenica aggiornata con L3, L5, L2, L1 e L4.
+- Lunedì invariato: hotel -> Camp Nou -> Collblanc L9 Sud -> Aeroport T2.
+- Audioguide, stato ascoltato e stato visitato mantenuti.
+- Cache PWA aggiornata.
