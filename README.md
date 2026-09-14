@@ -26,3 +26,13 @@ Allineata alla guida SABATO_LINEARE.
 - Le fermate effettivamente usate dall'itinerario sono marcate con ★.
 - Le altre fermate restano visibili come riferimento, come richiesto.
 - I fast food reali restano disponibili come layer separato.
+
+
+## V8 - metro tematizzata e percorsi pedonali reali
+- Rimosso OpenRailwayMap: non viene più mostrata l'infrastruttura tecnica ferroviaria.
+- Le linee metro vengono lette esclusivamente dalle relazioni OpenStreetMap route=subway e colorate per linea (L1 rossa, L2 viola, L3 verde, L4 gialla, L5 blu, L9 arancione, ecc.).
+- Tutte le fermate presenti nelle relazioni metro sono visibili; quelle del viaggio hanno il simbolo ★.
+- Rimossi i vecchi percorsi pedonali disegnati a mano.
+- I percorsi a piedi vengono calcolati live dal profilo pedonale FOSSGIS/OSRM usando strade e sentieri OpenStreetMap.
+- Nessuna linea retta inventata viene mostrata come fallback se il routing pedonale non e' disponibile.
+- Hotel corretto alle coordinate pubblicate; Maria Cristina ripristinata separatamente.

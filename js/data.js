@@ -24,8 +24,8 @@ const TRIP_DATA={
           "icon": "M",
           "name": "Zona Universitaria",
           "time": "circa 13:30",
-          "lat": 41.3841,
-          "lng": 2.11132,
+          "lat": 41.38572,
+          "lng": 2.11113,
           "description": "Cambio tra L9 Sud e L3.",
           "transit": "L3 direzione Trinitat Nova.",
           "cost": "TRASPORTO"
@@ -36,8 +36,8 @@ const TRIP_DATA={
           "icon": "M",
           "name": "Maria Cristina",
           "time": "circa 14:00",
-          "lat": 41.3863149,
-          "lng": 2.1293222,
+          "lat": 41.38855,
+          "lng": 2.1264,
           "description": "Arrivo nella zona dell'hotel. Da qui pranzo economico, piccola spesa e poi check-in.",
           "transit": "A piedi nella zona Les Corts.",
           "cost": "TRASPORTO"
@@ -48,8 +48,8 @@ const TRIP_DATA={
           "icon": "H",
           "name": "Aparthotel Atenea Barcelona",
           "time": "15:00-15:30",
-          "lat": 41.38605,
-          "lng": 2.12743,
+          "lat": 41.3863149,
+          "lng": 2.1293222,
           "description": "Check-in, sistemazione degli zaini e partenza per il pomeriggio.",
           "cost": "HOTEL"
         },
@@ -200,8 +200,8 @@ const TRIP_DATA={
           "icon": "H",
           "name": "Rientro in hotel",
           "time": "fine giornata",
-          "lat": 41.38605,
-          "lng": 2.12743,
+          "lat": 41.3863149,
+          "lng": 2.1293222,
           "description": "Scendere a Maria Cristina e raggiungere l'hotel a piedi.",
           "cost": "HOTEL"
         }
@@ -942,6 +942,135 @@ const TRIP_DATA={
           "note": "WC pubblico / servizio spiaggia nell'area Barceloneta.",
           "when": "se serve"
         }
+      ],
+      "walkRoutes": [
+        {
+          "name": "Maria Cristina -> pranzo -> hotel",
+          "points": [
+            [
+              41.38855,
+              2.1264
+            ],
+            [
+              41.38115,
+              2.1241
+            ],
+            [
+              41.3863149,
+              2.1293222
+            ]
+          ]
+        },
+        {
+          "name": "Hotel -> Les Corts metro",
+          "points": [
+            [
+              41.3863149,
+              2.1293222
+            ],
+            [
+              41.3842,
+              2.13093
+            ]
+          ]
+        },
+        {
+          "name": "Diagonal -> Pedrera -> Batllo -> Catalunya",
+          "points": [
+            [
+              41.39545,
+              2.16188
+            ],
+            [
+              41.39536,
+              2.16197
+            ],
+            [
+              41.39172,
+              2.16495
+            ],
+            [
+              41.38702,
+              2.17005
+            ]
+          ]
+        },
+        {
+          "name": "Rambla -> Boqueria -> Placa Reial -> Colombo",
+          "points": [
+            [
+              41.38702,
+              2.17005
+            ],
+            [
+              41.38174,
+              2.17158
+            ],
+            [
+              41.38011,
+              2.17524
+            ],
+            [
+              41.37625,
+              2.17734
+            ]
+          ]
+        },
+        {
+          "name": "Colombo -> Port Vell -> Gotic -> Born -> Barceloneta",
+          "points": [
+            [
+              41.37625,
+              2.17734
+            ],
+            [
+              41.3778,
+              2.18105
+            ],
+            [
+              41.38255,
+              2.17731
+            ],
+            [
+              41.38385,
+              2.18209
+            ],
+            [
+              41.3812,
+              2.1854
+            ],
+            [
+              41.37895,
+              2.19223
+            ]
+          ]
+        },
+        {
+          "name": "Barceloneta -> metro",
+          "points": [
+            [
+              41.37895,
+              2.19223
+            ],
+            [
+              41.3824,
+              2.1854
+            ]
+          ]
+        },
+        {
+          "name": "Maria Cristina -> hotel",
+          "points": [
+            [
+              41.38855,
+              2.1264
+            ],
+            [
+              41.3863149,
+              2.1293222
+            ]
+          ]
+        }
       ]
     },
     {
@@ -956,8 +1085,8 @@ const TRIP_DATA={
           "icon": "H",
           "name": "Hotel - partenza",
           "time": "08:45/09:00",
-          "lat": 41.38605,
-          "lng": 2.12743,
+          "lat": 41.3863149,
+          "lng": 2.1293222,
           "description": "Dopo colazione si raggiunge Les Corts L3 per iniziare la mattina.",
           "cost": "HOTEL"
         },
@@ -1084,8 +1213,8 @@ const TRIP_DATA={
           "icon": "H",
           "name": "Rientro in hotel",
           "time": "entro fine servizio",
-          "lat": 41.38605,
-          "lng": 2.12743,
+          "lat": 41.3863149,
+          "lng": 2.1293222,
           "description": "Barceloneta L4 -> Passeig de Gracia; cambio L3 -> Maria Cristina -> hotel.",
           "cost": "HOTEL"
         }
@@ -1833,6 +1962,139 @@ const TRIP_DATA={
           "note": "WC pubblico / servizio spiaggia nell'area Barceloneta.",
           "when": "se serve"
         }
+      ],
+      "walkRoutes": [
+        {
+          "name": "Hotel -> Les Corts metro",
+          "points": [
+            [
+              41.3863149,
+              2.1293222
+            ],
+            [
+              41.3842,
+              2.13093
+            ]
+          ]
+        },
+        {
+          "name": "Giro esterno Sagrada Familia",
+          "points": [
+            [
+              41.40363,
+              2.17436
+            ],
+            [
+              41.40435,
+              2.17495
+            ],
+            [
+              41.40405,
+              2.1761
+            ],
+            [
+              41.4031,
+              2.17655
+            ],
+            [
+              41.40255,
+              2.17555
+            ],
+            [
+              41.40363,
+              2.17436
+            ]
+          ]
+        },
+        {
+          "name": "Glories -> Torre Glories -> Disseny Hub",
+          "points": [
+            [
+              41.40399,
+              2.18789
+            ],
+            [
+              41.40355,
+              2.1888
+            ],
+            [
+              41.40285,
+              2.18855
+            ],
+            [
+              41.40399,
+              2.18789
+            ]
+          ]
+        },
+        {
+          "name": "Jaume I -> pranzo -> Cattedrale",
+          "points": [
+            [
+              41.38357,
+              2.1782
+            ],
+            [
+              41.38371,
+              2.17857
+            ],
+            [
+              41.38396,
+              2.1762
+            ]
+          ]
+        },
+        {
+          "name": "Arc -> Ciutadella -> Port Olimpic -> Nova Icaria -> Barceloneta",
+          "points": [
+            [
+              41.39105,
+              2.18069
+            ],
+            [
+              41.38812,
+              2.18745
+            ],
+            [
+              41.3852,
+              2.2011
+            ],
+            [
+              41.39022,
+              2.20335
+            ],
+            [
+              41.37895,
+              2.19223
+            ]
+          ]
+        },
+        {
+          "name": "Barceloneta -> metro",
+          "points": [
+            [
+              41.37895,
+              2.19223
+            ],
+            [
+              41.3824,
+              2.1854
+            ]
+          ]
+        },
+        {
+          "name": "Maria Cristina -> hotel",
+          "points": [
+            [
+              41.38855,
+              2.1264
+            ],
+            [
+              41.3863149,
+              2.1293222
+            ]
+          ]
+        }
       ]
     },
     {
@@ -1847,8 +2109,8 @@ const TRIP_DATA={
           "icon": "H",
           "name": "Hotel - check-out",
           "time": "09:15-09:30",
-          "lat": 41.38605,
-          "lng": 2.12743,
+          "lat": 41.3863149,
+          "lng": 2.1293222,
           "description": "Colazione tranquilla, check-out e partenza con i tre zaini. Non si torna piu in hotel.",
           "cost": "HOTEL"
         },
@@ -1869,8 +2131,8 @@ const TRIP_DATA={
           "icon": "M",
           "name": "Collblanc L9 Sud",
           "time": "circa 10:10",
-          "lat": 41.37561,
-          "lng": 2.11847,
+          "lat": 41.37575,
+          "lng": 2.1191,
           "description": "Dal Camp Nou raggiungere a piedi Collblanc.",
           "transit": "L9 Sud direzione Aeroport T1, senza altri cambi. Scendere ad Aeroport T2.",
           "cost": "TRASPORTO"
@@ -1995,6 +2257,25 @@ const TRIP_DATA={
           "address": "Barcelona El Prat Airport Terminal 2",
           "note": "Servizi igienici disponibili in aeroporto.",
           "when": "arrivo T2"
+        }
+      ],
+      "walkRoutes": [
+        {
+          "name": "Hotel -> Camp Nou -> Collblanc",
+          "points": [
+            [
+              41.3863149,
+              2.1293222
+            ],
+            [
+              41.3809,
+              2.12283
+            ],
+            [
+              41.37575,
+              2.1191
+            ]
+          ]
         }
       ]
     }

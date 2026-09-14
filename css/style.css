@@ -41,3 +41,19 @@ main{flex:1;min-height:0}.view{display:none;height:100%;overflow:auto}.view.acti
   background:#eef1f5;border-radius:8px;padding:1px 4px;font-size:9px;color:#39424e
 }
 .metro-label{overflow:hidden;text-overflow:ellipsis}
+
+.metro-stop-v8{
+  display:flex;align-items:center;gap:4px;
+  background:rgba(255,255,255,.96);border:1px solid #b8c0ca;border-radius:14px;
+  padding:2px 6px 2px 2px;white-space:nowrap;
+  box-shadow:0 1px 5px rgba(0,0,0,.20);
+  font-size:10px;color:#27313c;
+}
+.metro-stop-v8.used{border:3px solid #243782;font-size:11px;font-weight:800;box-shadow:0 2px 8px rgba(0,0,0,.32)}
+.metro-symbol{
+  width:22px;height:22px;border-radius:50%;display:grid;place-items:center;
+  background:#555;color:#fff;font-weight:900;font-size:11px;flex:0 0 22px
+}
+.metro-name{font-weight:800}
+.metro-lines{display:flex;gap:2px}
+.line-badge{color:#fff;font-size:8px;font-weight:900;border-radius:7px;padding:1px 4px;text-shadow:0 1px 1px rgba(0,0,0,.35)}
