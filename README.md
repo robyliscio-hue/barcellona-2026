@@ -36,3 +36,18 @@ Allineata alla guida SABATO_LINEARE.
 - I percorsi a piedi vengono calcolati live dal profilo pedonale FOSSGIS/OSRM usando strade e sentieri OpenStreetMap.
 - Nessuna linea retta inventata viene mostrata come fallback se il routing pedonale non e' disponibile.
 - Hotel corretto alle coordinate pubblicate; Maria Cristina ripristinata separatamente.
+
+
+## V9 - ristoranti sabato geolocalizzati
+- EL RINCÓN TAPAS &BAR e Don Sandwich Cafeteria non usano più coordinate inserite a mano.
+- Il sito risolve live il POI tramite nome/indirizzo su OpenStreetMap/Overpass.
+- Fallback: numero civico reale dell'indirizzo OSM.
+- Il routing pedonale del sabato usa esattamente le coordinate appena risolte.
+- Percorso principale e percorso backup sono calcolati separatamente; il backup è grigio e più leggero.
+
+
+## V10 - grafica fermate metro semplificata
+- Sulla mappa ogni fermata mostra solo il simbolo M e il badge della linea.
+- Il nome della fermata non compare più sempre a video.
+- Toccando/cliccando la fermata si apre il popup con nome e linee.
+- Le fermate usate nel viaggio restano leggermente evidenziate nel bordo, senza testo aggiuntivo.
