@@ -216,28 +216,32 @@ const TRIP_DATA={
               2.07428
             ],
             [
-              41.3178,
-              2.074
+              41.3145,
+              2.071
             ],
             [
-              41.3312,
-              2.0912
+              41.3265,
+              2.0755
             ],
             [
-              41.3447,
-              2.1057
+              41.339,
+              2.083
             ],
             [
-              41.3576,
-              2.1187
+              41.3505,
+              2.091
             ],
             [
-              41.3749,
-              2.1185
+              41.362,
+              2.099
             ],
             [
-              41.3841,
-              2.11132
+              41.374,
+              2.106
+            ],
+            [
+              41.38572,
+              2.11113
             ]
           ]
         },
@@ -246,16 +250,16 @@ const TRIP_DATA={
           "color": "#239b56",
           "coords": [
             [
-              41.3841,
-              2.11132
+              41.38572,
+              2.11113
             ],
             [
-              41.38385,
-              2.1194
+              41.38775,
+              2.11711
             ],
             [
-              41.3884,
-              2.12631
+              41.38843,
+              2.12645
             ]
           ]
         },
@@ -264,28 +268,52 @@ const TRIP_DATA={
           "color": "#239b56",
           "coords": [
             [
-              41.3833,
-              2.1278
+              41.38418,
+              2.13095
             ],
             [
-              41.3884,
-              2.1263
+              41.38133,
+              2.13583
             ],
             [
-              41.3902,
-              2.1369
+              41.37911,
+              2.14008
             ],
             [
-              41.3922,
-              2.1455
+              41.3784,
+              2.1454
             ],
             [
-              41.3935,
-              2.1537
+              41.37515,
+              2.14925
             ],
             [
-              41.3957,
-              2.1605
+              41.37415,
+              2.1592
+            ],
+            [
+              41.37525,
+              2.16845
+            ],
+            [
+              41.3768,
+              2.17505
+            ],
+            [
+              41.38115,
+              2.17325
+            ],
+            [
+              41.3863,
+              2.16965
+            ],
+            [
+              41.3896,
+              2.1673
+            ],
+            [
+              41.39545,
+              2.16185
             ]
           ]
         },
@@ -298,16 +326,16 @@ const TRIP_DATA={
               2.1854
             ],
             [
-              41.3859,
-              2.18
+              41.38357,
+              2.1782
             ],
             [
-              41.3889,
-              2.1745
+              41.38957,
+              2.17415
             ],
             [
-              41.3916,
-              2.165
+              41.3896,
+              2.1673
             ]
           ]
         },
@@ -316,24 +344,52 @@ const TRIP_DATA={
           "color": "#239b56",
           "coords": [
             [
-              41.3916,
-              2.165
+              41.3896,
+              2.1673
             ],
             [
-              41.3935,
-              2.1537
+              41.3863,
+              2.16965
             ],
             [
-              41.3922,
-              2.1455
+              41.38115,
+              2.17325
             ],
             [
-              41.3902,
-              2.1369
+              41.3768,
+              2.17505
             ],
             [
-              41.3884,
-              2.1263
+              41.37525,
+              2.16845
+            ],
+            [
+              41.37415,
+              2.1592
+            ],
+            [
+              41.37515,
+              2.14925
+            ],
+            [
+              41.3784,
+              2.1454
+            ],
+            [
+              41.37911,
+              2.14008
+            ],
+            [
+              41.38133,
+              2.13583
+            ],
+            [
+              41.38418,
+              2.13095
+            ],
+            [
+              41.38843,
+              2.12645
             ]
           ]
         }
@@ -592,63 +648,63 @@ const TRIP_DATA={
       ],
       "amenities": [
         {
-          "id": "f-rincon",
+          "id": "s-rincon",
           "type": "restaurant",
           "name": "El Rincon Tapas & Bar",
-          "lat": 41.3809,
-          "lng": 2.126,
+          "lat": 41.3849,
+          "lng": 2.1282,
           "address": "Travessera de les Corts, 136, Barcelona",
-          "note": "Pranzo sabato - prima scelta · €10-20",
+          "note": "PRANZO SABATO - prima scelta · €10-20",
           "when": "14:00 circa"
         },
         {
-          "id": "f-donsand",
+          "id": "s-donsand",
           "type": "restaurant",
           "name": "Don Sandwich Cafeteria",
-          "lat": 41.382,
-          "lng": 2.128,
+          "lat": 41.3835,
+          "lng": 2.1264,
           "address": "Carrer de Figols, 38, Barcelona",
-          "note": "Pranzo sabato - backup rapido",
+          "note": "PRANZO SABATO - backup rapido",
           "when": "14:00 circa"
         },
         {
-          "id": "f-mcdpg",
+          "id": "s-mcd",
           "type": "fastfood",
           "name": "McDonald's Passeig de Gracia",
           "lat": 41.39115,
           "lng": 2.16585,
           "address": "Passeig de Gracia, 48, Barcelona",
-          "note": "Fast food lungo Pedrera -> Casa Batllo -> Catalunya · €1-10",
+          "note": "FAST FOOD concordato - sul percorso Pedrera -> Casa Batllo -> Catalunya · €1-10",
           "when": "backup"
         },
         {
-          "id": "f-five",
+          "id": "s-five",
           "type": "fastfood",
           "name": "Five Guys Passeig de Gracia",
-          "lat": 41.39032,
-          "lng": 2.16769,
+          "lat": 41.38975,
+          "lng": 2.1681,
           "address": "Passeig de Gracia, 28, Barcelona",
-          "note": "Fast food lungo il percorso · €10-20",
+          "note": "FAST FOOD concordato · €10-20",
           "when": "backup"
         },
         {
-          "id": "f-bk",
+          "id": "s-bk",
           "type": "fastfood",
-          "name": "Burger King Arago",
-          "lat": 41.39195,
-          "lng": 2.16465,
+          "name": "Burger King Arago / Passeig de Gracia",
+          "lat": 41.39075,
+          "lng": 2.16625,
           "address": "Carrer d'Arago, 259, Barcelona",
-          "note": "Fast food backup nella zona Casa Batllo",
+          "note": "FAST FOOD concordato - backup zona Casa Batllo · €10-20",
           "when": "backup"
         },
         {
-          "id": "f-taberna-s",
+          "id": "s-taberna",
           "type": "restaurant",
           "name": "La Taberna de la Barceloneta",
-          "lat": 41.3792,
-          "lng": 2.19,
+          "lat": 41.38015,
+          "lng": 2.1892,
           "address": "Carrer d'Andrea Doria, 27, Barcelona",
-          "note": "Cena sabato - prima scelta · €10-20",
+          "note": "CENA SABATO - prima scelta · €10-20",
           "when": "21:00 circa"
         },
         {
@@ -835,12 +891,16 @@ const TRIP_DATA={
           "color": "#239b56",
           "coords": [
             [
-              41.3833,
-              2.1278
+              41.38418,
+              2.13095
             ],
             [
-              41.3791,
-              2.14
+              41.38133,
+              2.13583
+            ],
+            [
+              41.37911,
+              2.14008
             ]
           ]
         },
@@ -849,16 +909,28 @@ const TRIP_DATA={
           "color": "#2f63b6",
           "coords": [
             [
-              41.3791,
-              2.14
+              41.37911,
+              2.14008
             ],
             [
-              41.3879,
-              2.1495
+              41.383,
+              2.148
+            ],
+            [
+              41.3875,
+              2.1537
+            ],
+            [
+              41.3917,
+              2.1586
             ],
             [
               41.3955,
-              2.1587
+              2.164
+            ],
+            [
+              41.3995,
+              2.169
             ],
             [
               41.40363,
@@ -889,8 +961,12 @@ const TRIP_DATA={
               2.17937
             ],
             [
-              41.4072,
-              2.187
+              41.404,
+              2.1832
+            ],
+            [
+              41.40835,
+              2.18715
             ]
           ]
         },
@@ -899,8 +975,8 @@ const TRIP_DATA={
           "color": "#d71920",
           "coords": [
             [
-              41.4072,
-              2.187
+              41.40835,
+              2.18715
             ],
             [
               41.40399,
@@ -917,12 +993,20 @@ const TRIP_DATA={
               2.18789
             ],
             [
-              41.398,
-              2.185
+              41.4005,
+              2.1857
+            ],
+            [
+              41.396,
+              2.183
             ],
             [
               41.39105,
               2.18069
+            ],
+            [
+              41.39,
+              2.176
             ],
             [
               41.38957,
@@ -981,16 +1065,16 @@ const TRIP_DATA={
               2.1854
             ],
             [
-              41.3859,
-              2.18
+              41.38357,
+              2.1782
             ],
             [
-              41.3889,
-              2.1745
+              41.38957,
+              2.17415
             ],
             [
-              41.3916,
-              2.165
+              41.3896,
+              2.1673
             ]
           ]
         },
@@ -999,24 +1083,52 @@ const TRIP_DATA={
           "color": "#239b56",
           "coords": [
             [
-              41.3916,
-              2.165
+              41.3896,
+              2.1673
             ],
             [
-              41.3935,
-              2.1537
+              41.3863,
+              2.16965
             ],
             [
-              41.3922,
-              2.1455
+              41.38115,
+              2.17325
             ],
             [
-              41.3902,
-              2.1369
+              41.3768,
+              2.17505
             ],
             [
-              41.3884,
-              2.1263
+              41.37525,
+              2.16845
+            ],
+            [
+              41.37415,
+              2.1592
+            ],
+            [
+              41.37515,
+              2.14925
+            ],
+            [
+              41.3784,
+              2.1454
+            ],
+            [
+              41.37911,
+              2.14008
+            ],
+            [
+              41.38133,
+              2.13583
+            ],
+            [
+              41.38418,
+              2.13095
+            ],
+            [
+              41.38843,
+              2.12645
             ]
           ]
         }
@@ -1229,44 +1341,44 @@ const TRIP_DATA={
       ],
       "amenities": [
         {
-          "id": "f-taperia",
+          "id": "d-taperia",
           "type": "restaurant",
           "name": "La Taperia Barcelona",
-          "lat": 41.3836,
-          "lng": 2.1779,
+          "lat": 41.38365,
+          "lng": 2.17775,
           "address": "Placa de l'Angel, 5, Barcelona",
-          "note": "Pranzo domenica - prima scelta · €10-20",
+          "note": "PRANZO DOMENICA - prima scelta · €10-20",
           "when": "12:15-13:05"
         },
         {
-          "id": "f-100m",
+          "id": "d-100m",
           "type": "fastfood",
           "name": "100 Montaditos Urquinaona",
           "lat": 41.38955,
           "lng": 2.1741,
           "address": "Placa d'Urquinaona, 1, Barcelona",
-          "note": "Fast food spagnolo economico; sosta facoltativa sulla direttrice.",
+          "note": "FAST FOOD SPAGNOLO concordato - facoltativo, direttamente sulla direttrice · €1-10",
           "when": "dopo Cattedrale"
         },
         {
-          "id": "f-taberna-d",
+          "id": "d-taberna",
           "type": "restaurant",
           "name": "La Taberna de la Barceloneta",
-          "lat": 41.3792,
-          "lng": 2.19,
+          "lat": 41.38015,
+          "lng": 2.1892,
           "address": "Carrer d'Andrea Doria, 27, Barcelona",
-          "note": "Cena domenica - prima scelta · €10-20",
+          "note": "CENA DOMENICA - prima scelta · €10-20",
           "when": "20:30 circa"
         },
         {
-          "id": "f-samsara",
+          "id": "d-samsara",
           "type": "restaurant",
           "name": "Samsara Barcelona",
           "lat": 41.38,
           "lng": 2.1885,
           "address": "Carrer de Guitert, 58, Barcelona",
-          "note": "Backup in Barceloneta · €10-20",
-          "when": "cena backup"
+          "note": "CENA DOMENICA - backup · €10-20",
+          "when": "backup"
         },
         {
           "id": "wc-ciuta",
@@ -1358,24 +1470,32 @@ const TRIP_DATA={
           "color": "#f28c28",
           "coords": [
             [
-              41.37561,
-              2.11847
+              41.37575,
+              2.1191
             ],
             [
-              41.3576,
-              2.1187
+              41.37,
+              2.111
             ],
             [
-              41.3447,
-              2.1057
+              41.361,
+              2.101
             ],
             [
-              41.3312,
-              2.0912
+              41.35,
+              2.091
             ],
             [
-              41.3178,
-              2.074
+              41.339,
+              2.083
+            ],
+            [
+              41.3265,
+              2.0755
+            ],
+            [
+              41.3145,
+              2.071
             ],
             [
               41.30385,
@@ -1401,6 +1521,26 @@ const TRIP_DATA={
         ]
       ],
       "amenities": [
+        {
+          "id": "l-fast-camp",
+          "type": "fastfood",
+          "name": "Fast food - area Camp Nou / Collblanc",
+          "lat": 41.3764,
+          "lng": 2.1197,
+          "address": "Collblanc, Barcelona",
+          "note": "Punto opzionale: NON e una sosta prevista dalla guida. Usare solo se serve prima della L9 Sud.",
+          "when": "eventuale"
+        },
+        {
+          "id": "l-fast-t2",
+          "type": "fastfood",
+          "name": "Fast food / ristoro - Aeroport T2",
+          "lat": 41.30385,
+          "lng": 2.07428,
+          "address": "Barcelona El Prat Airport Terminal 2",
+          "note": "Opzione pratica dopo l'arrivo al Terminal 2; scelta sul posto.",
+          "when": "prima del volo"
+        },
         {
           "id": "wc-airport",
           "type": "wc",
