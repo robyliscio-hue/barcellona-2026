@@ -1,20 +1,15 @@
-# Barcellona 2026 – v3 Playlist Audioguide
+# Barcellona 2026 - sito definitivo
 
-Standard adottato:
-- ogni tappa supporta 0, 1 o N tracce;
-- libreria centralizzata in `js/audioguide.js`;
-- un solo player attivo;
-- playlist compatta;
-- stato ✓ ascoltata salvato sul dispositivo;
-- stato ✓ visitato della tappa;
-- foto e descrizione opzionali per singola traccia.
+Versione costruita sul piano definitivo 19-21 settembre 2026.
 
-Cartelle audio previste:
-- Arenas de Barcelona
-- Font Màgica e Montjuïc
-- La Pedrera
-- Palau Nacional
-- PLAÇA ESPANYA
-- Sagrada_familia
+Funzioni:
+- 3 giornate selezionabili;
+- linee metro e tratti a piedi separati;
+- rientro in hotel sabato e domenica;
+- lunedi Camp Nou -> Collblanc -> Aeroport T2;
+- playlist audioguide con un solo player;
+- stato ascoltata e visitato salvato sul dispositivo;
+- audioguide extra conservate in una sezione separata;
+- nomi audio normalizzati per GitHub Pages.
 
-Nota: per Arenas 00G/00H i nomi sono stati ricostruiti in base ai titoli delle tracce; se il nome reale del file differisce, basta correggere `file:` in `js/audioguide.js`.
+Caricare il CONTENUTO di questa cartella nella root del repository GitHub Pages.
