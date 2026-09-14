@@ -17,3 +17,12 @@ Allineata alla guida SABATO_LINEARE.
 - Nuovo layer "Fast food reali": carica tutti i POI amenity=fast_food mappati nelle zone del viaggio.
 - La vecchia metro schematica resta come fallback offline ma e' disattivata all'avvio.
 - I dati live richiedono connessione; mappa, guida e audio continuano a funzionare offline secondo la cache esistente.
+
+
+## V7 - layer metro + tutte le fermate
+- Rimossi dalla visualizzazione tutti i tracciati metro costruiti a mano.
+- Aggiunto layer georeferenziato OpenRailwayMap per la geometria ferroviaria reale.
+- Tutte le stazioni/fermate metro dell'area vengono caricate da OpenStreetMap/Overpass.
+- Le fermate effettivamente usate dall'itinerario sono marcate con ★.
+- Le altre fermate restano visibili come riferimento, come richiesto.
+- I fast food reali restano disponibili come layer separato.
