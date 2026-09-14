@@ -1,7 +1,8 @@
 let currentDay=TRIP_DATA.days[0],currentOpen=null,userMarker=null;
 const map=L.map('map',{zoomControl:true}).setView([41.387,2.17],13);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
-let walkLayer=L.layerGroup().addTo(map),metroLayer=L.layerGroup().addTo(map),stopsLayer=L.layerGroup().addTo(map);
+let walkLayer=L.layerGroup().addTo(map),metroLayer=L.layerGroup().addTo(map),stopsLayer=L.layerGroup().addTo(map),
+foodLayer=L.layerGroup().addTo(map),wcLayer=L.layerGroup().addTo(map);
 const markerMap=new Map();
 
 function setView(viewId){
@@ -20,7 +21,7 @@ function renderDay(day){
  document.getElementById('dayTitle').textContent=day.title;
  document.getElementById('daySubtitle').textContent=day.subtitle;
  document.querySelectorAll('.day-tab').forEach(b=>b.classList.toggle('active',b.dataset.day===day.id));
- walkLayer.clearLayers();metroLayer.clearLayers();stopsLayer.clearLayers();markerMap.clear();
+ walkLayer.clearLayers();metroLayer.clearLayers();stopsLayer.clearLayers();foodLayer.clearLayers();wcLayer.clearLayers();markerMap.clear();
 
  day.metro.forEach(x=>L.polyline(x.coords,{color:x.color,weight:7,opacity:.72,lineCap:'round'}).bindTooltip(x.name,{sticky:true}).addTo(metroLayer));
  day.walk.forEach(x=>L.polyline(x,{color:'#2d67b1',weight:4,opacity:.82,dashArray:'8,8',lineCap:'round'}).addTo(walkLayer));
@@ -28,6 +29,13 @@ function renderDay(day){
  day.stops.forEach(s=>{
    const m=L.marker([s.lat,s.lng],{icon:iconFor(s)}).addTo(stopsLayer);
    m.bindTooltip(s.name,{direction:'top',offset:[0,-14]});m.on('click',()=>openStop(s));markerMap.set(s.id,m);
+ });
+ (day.amenities||[]).forEach(a=>{
+   const emoji=a.type==='wc'?'🚻':(a.type==='fastfood'?'🍔':'🍴');
+   const ic=L.divIcon({className:'',html:`<div class="amenity-marker ${a.type}">${emoji}</div>`,iconSize:[34,34],iconAnchor:[17,17]});
+   const dest=encodeURIComponent(a.address||a.name);
+   const pop=`<div class="amenity-popup"><b>${emoji} ${a.name}</b><div class="small">${a.when||''}</div><div>${a.note||''}</div><a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${dest}">🧭 Portami qui</a></div>`;
+   L.marker([a.lat,a.lng],{icon:ic}).bindPopup(pop).bindTooltip(a.name,{direction:'top'}).addTo(a.type==='wc'?wcLayer:foodLayer);
  });
 
  const pts=day.stops.map(s=>[s.lat,s.lng]);
@@ -84,6 +92,8 @@ function focusStop(id){const s=currentDay.stops.find(x=>x.id===id);closeSheet();
 document.getElementById('toggleWalk').onchange=e=>e.target.checked?walkLayer.addTo(map):map.removeLayer(walkLayer);
 document.getElementById('toggleMetro').onchange=e=>e.target.checked?metroLayer.addTo(map):map.removeLayer(metroLayer);
 document.getElementById('toggleStops').onchange=e=>e.target.checked?stopsLayer.addTo(map):map.removeLayer(stopsLayer);
+document.getElementById('toggleFood').onchange=e=>e.target.checked?foodLayer.addTo(map):map.removeLayer(foodLayer);
+document.getElementById('toggleWc').onchange=e=>e.target.checked?wcLayer.addTo(map):map.removeLayer(wcLayer);
 document.getElementById('locateBtn').onclick=()=>{if(!navigator.geolocation){alert('Geolocalizzazione non supportata.');return}navigator.geolocation.getCurrentPosition(p=>{const q=[p.coords.latitude,p.coords.longitude];if(userMarker)map.removeLayer(userMarker);userMarker=L.circleMarker(q,{radius:9,weight:3,color:'#fff',fillColor:'#2f7df6',fillOpacity:1}).addTo(map).bindTooltip('Sei qui').openTooltip();setView('mapView');map.setView(q,16)},()=>alert('Concedi al sito il permesso di localizzazione.'),{enableHighAccuracy:true,timeout:10000})};
 buildDayTabs();buildExtras();renderDay(TRIP_DATA.days[0]);
 if('serviceWorker' in navigator&&location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
