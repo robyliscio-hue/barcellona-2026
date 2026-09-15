@@ -15,6 +15,7 @@
   const metroReal=L.layerGroup().addTo(map);
   const walkingReal=L.layerGroup().addTo(map);
   const liveFood=L.layerGroup().addTo(map);
+  window.liveFood=liveFood; // v12: accessibile anche dalla console
   const plannedFoodReal=L.layerGroup().addTo(map);
 
   // POI pianificati: niente coordinate stimate.
@@ -33,6 +34,18 @@
     }
   };
   const resolvedPOI={};
+
+  // V12: POI pianificati inglobati dal file esportato dal browser.
+  const V12_POI_BY_ID={};
+  try{
+    const days=(window.V12_SNAPSHOT&&window.V12_SNAPSHOT.poi&&window.V12_SNAPSHOT.poi.days)||{};
+    Object.values(days).flat().forEach(x=>{ if(x&&x.id) V12_POI_BY_ID[x.id]=x; });
+  }catch(e){ console.warn('Snapshot POI v12 non leggibile',e); }
+  ['s-rincon','s-donsand'].forEach(id=>{
+    const x=V12_POI_BY_ID[id];
+    if(x&&Number.isFinite(x.lat)&&Number.isFinite(x.lng)) resolvedPOI[id]=[x.lat,x.lng];
+  });
+
 
   const METRO_COLORS={
     'L1':'#d71920',
@@ -112,6 +125,7 @@
   }
 
   async function resolvePlannedPOI(id,def){
+    if(resolvedPOI[id]) return {coord:resolvedPOI[id],tags:{'addr:street':def.street,'addr:housenumber':def.house,name:def.name},source:'snapshot-v12'};
     // Preferisce il locale nominato; fallback all'indirizzo civico reale OSM.
     const q=`[out:json][timeout:30];
       (
@@ -154,7 +168,7 @@
             <b>🍴 ${def.name}</b>
             <div class="small">${def.label}</div>
             <div>${addr}, Barcelona</div>
-            <div><b>Posizione:</b> ricavata live dal POI/numero civico OpenStreetMap</div>
+            <div><b>Posizione:</b> inglobata nello snapshot v12</div>
             <a target="_blank" rel="noopener"
                href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(def.name+', '+addr+', Barcelona')}">🧭 Portami qui</a>
           </div>`)
@@ -277,16 +291,16 @@
     throw lastErr||new Error('Metro non disponibile');
   }
   async function loadMetro(){
-    const cached=readMetroCache();
-    if(cached){
-      renderMetroData(cached.data);
-      // Refresh opportunistico e silenzioso: la mappa resta comunque disponibile.
-      fetchMetroSnapshot().then(data=>{writeMetroCache(data);renderMetroData(data);}).catch(()=>{});
-      return {source:'cache',savedAt:cached.savedAt};
+    const embedded=window.V12_SNAPSHOT&&window.V12_SNAPSHOT.metro;
+    if(embedded&&embedded.elements&&embedded.elements.length){
+      renderMetroData(embedded);
+      writeMetroCache(embedded);
+      return {source:'snapshot-v12',savedAt:Date.now()};
     }
+    const cached=readMetroCache();
+    if(cached){ renderMetroData(cached.data); return {source:'cache',savedAt:cached.savedAt}; }
     const data=await fetchMetroSnapshot();
-    writeMetroCache(data);
-    renderMetroData(data);
+    writeMetroCache(data); renderMetroData(data);
     return {source:'network',savedAt:Date.now()};
   }
 
@@ -354,6 +368,15 @@
     }
   }
   async function loadFood(){
+    const embedded=(window.V12_SNAPSHOT&&window.V12_SNAPSHOT.fastfood&&window.V12_SNAPSHOT.fastfood.items)||[];
+    if(embedded.length){
+      embedded.forEach(x=>{
+        if(!Number.isFinite(x.lat)||!Number.isFinite(x.lng)) return;
+        const ic=L.divIcon({className:'',html:'<div class="amenity-marker fastfood">🍔</div>',iconSize:[38,38],iconAnchor:[19,19]});
+        L.marker([x.lat,x.lng],{icon:ic}).bindTooltip(x.name||'Fast food',{direction:'top'}).bindPopup(x.popup||('<b>🍔 '+(x.name||'Fast food')+'</b>')).addTo(liveFood);
+      });
+      return {source:'snapshot-v12',count:embedded.length};
+    }
     const q=`[out:json][timeout:35];
       nwr["amenity"="fast_food"](41.30,2.07,41.415,2.215);
       out center tags;`;
@@ -433,7 +456,7 @@
     const m=results[0].status==='fulfilled', f=results[1].status==='fulfilled', p=results[2].status==='fulfilled';
     const el=document.getElementById('liveStatus');
     if(m){
-      const src=results[0].value && results[0].value.source==='cache' ? 'cache locale' : 'dati OSM';
+      const src=results[0].value && results[0].value.source==='snapshot-v12' ? 'snapshot v12' : (results[0].value && results[0].value.source==='cache' ? 'cache locale' : 'dati OSM');
       el.innerHTML='✓ Metro caricata da '+src+(f?' · fast food caricati':'')+(p?' · ristoranti pianificati geolocalizzati':'');
     }else{
       el.innerHTML='Metro: serve una prima connessione per creare la cache locale';

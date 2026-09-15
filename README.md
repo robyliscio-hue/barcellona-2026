@@ -60,3 +60,10 @@ Allineata alla guida SABATO_LINEARE.
 - Fermate usate nel viaggio: M + badge linea, bordo evidenziato.
 - Fermate non usate: piccolo punto discreto, comunque cliccabile per nome/linea.
 - Il refresh dei dati metro avviene in modo silenzioso quando la cache è già disponibile.
+
+
+## Versione 12 - dati inglobati
+- Snapshot metro esportato dal browser incluso nel pacchetto (nessuna prima chiamata Overpass necessaria).
+- POI pianificati esportati inclusi; El Rincon e Don Sandwich usano le coordinate dello snapshot.
+- liveFood esposto anche come window.liveFood per diagnostica/esportazione da console.
+- I file fastfood e percorsi ricevuti erano vuoti: la v12 mantiene il caricamento live per fast food e routing pedonale, senza inventare dati.
