@@ -116,3 +116,9 @@ main{flex:1;min-height:0}.view{display:none;height:100%;overflow:auto}.view.acti
 .metro-action.up{border-color:#168447}.metro-action.down{border-color:#c53d32}
 .metro-action-arrow{font-size:14px;font-weight:900}.metro-action small{font-size:9px;font-weight:800}
 @media(max-width:600px){.metro-action{font-size:10px;padding:4px 6px}.metro-action small{font-size:8px}.metro-action-stack{transform:scale(.95)}}
+
+/* V13.4 - frecce metro compatte: dettaglio completo resta nel popup */
+.metro-action-stack{gap:1px!important;filter:drop-shadow(0 1px 2px rgba(0,0,0,.3))!important;}
+.metro-action{display:flex!important;align-items:center!important;justify-content:center!important;width:26px!important;height:26px!important;box-sizing:border-box!important;border-width:2px!important;border-radius:50%!important;padding:0!important;font-size:0!important;}
+.metro-action-arrow{font-size:17px!important;line-height:1!important;}
+@media(max-width:600px){.metro-action-stack{transform:none!important}.metro-action{width:24px!important;height:24px!important}.metro-action-arrow{font-size:16px!important}}

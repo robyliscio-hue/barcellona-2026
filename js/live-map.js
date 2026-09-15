@@ -13,7 +13,7 @@
   */
 
   const metroReal=L.layerGroup().addTo(map);
-  const metroActions=L.layerGroup().addTo(map); // V13.2 SALI/SCENDI sul percorso
+  const metroActions=L.layerGroup().addTo(map); // V13.4 frecce metro compatte sul percorso
   const walkingReal=L.layerGroup().addTo(map);
   const liveFood=L.layerGroup().addTo(map);
   window.liveFood=liveFood; // v12: accessibile anche dalla console
@@ -91,12 +91,10 @@
     byStop.forEach(({station,items})=>{
       const html=items.map(x=>{
         const arrow=x.kind==='up'?'⬆':'⬇';
-        const action=x.kind==='up'?'SALI':'SCENDI';
-        const dest=(x.kind==='up' && x.destination)?`<small> → ${x.destination}</small>`:'';
-        return `<span class="metro-action ${x.kind}"><span class="metro-action-arrow">${arrow}</span> ${action} <b>${x.line}</b>${dest}</span>`;
+        return `<span class="metro-action ${x.kind}" title="${x.kind==='up'?'Sali':'Scendi'} ${x.line}"><span class="metro-action-arrow">${arrow}</span></span>`;
       }).join('');
       const popup=items.map(x=>`<div><b>${x.kind==='up'?'⬆ SALI':'⬇ SCENDI'} ${x.line}</b>${x.kind==='up'&&x.destination?`<br>Direzione <b>${x.destination}</b>`:''}<br><span class="small">${x.segment}</span></div>`).join('<hr>');
-      const ic=L.divIcon({className:'metro-action-wrap',html:`<div class="metro-action-stack">${html}</div>`,iconSize:[205,58],iconAnchor:[102,29]});
+      const ic=L.divIcon({className:'metro-action-wrap',html:`<div class="metro-action-stack">${html}</div>`,iconSize:[34,34],iconAnchor:[17,17]});
       L.marker([Number(station.lat),Number(station.lng)],{icon:ic,interactive:true,zIndexOffset:5000,pane:'markerPane'})
        .bindTooltip(station.name,{direction:'top',offset:[0,-24]})
        .bindPopup(`<div class="amenity-popup"><b>🚇 ${station.name}</b>${popup}</div>`)
