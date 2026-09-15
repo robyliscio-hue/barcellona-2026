@@ -304,6 +304,41 @@
     return {source:'network',savedAt:Date.now()};
   }
 
+  const WALK_CACHE_KEY='barcellona.walking.v121';
+  function readWalkCache(){
+    try{return JSON.parse(localStorage.getItem(WALK_CACHE_KEY)||'{}')||{};}catch(e){return {};}
+  }
+  function writeWalkCache(cache){
+    try{localStorage.setItem(WALK_CACHE_KEY,JSON.stringify(cache));}catch(e){console.warn('Cache percorsi non salvata',e);}
+  }
+  function saveWalkRoute(dayId,r,data){
+    const cache=readWalkCache();
+    if(!cache[dayId]) cache[dayId]=[];
+    const item={name:r.name,points:r.points,distance:data.distance,duration:data.duration,geometry:data.geometry,capturedAt:new Date().toISOString()};
+    const ix=cache[dayId].findIndex(x=>x.name===r.name);
+    if(ix>=0) cache[dayId][ix]=item; else cache[dayId].push(item);
+    writeWalkCache(cache);
+    console.log('[V12.1] percorso salvato:',dayId,r.name);
+  }
+  function renderCachedWalk(dayId,r){
+    const cache=readWalkCache();
+    const item=(cache[dayId]||[]).find(x=>x.name===r.name);
+    if(!item||!item.geometry||!item.geometry.coordinates) return false;
+    const latlngs=item.geometry.coordinates.map(c=>[c[1],c[0]]);
+    L.polyline(latlngs,{color:r.backup?'#6f7d8a':'#1976d2',weight:r.primary?6:5,opacity:r.backup?.62:.84,dashArray:r.backup?'4 8':'8 7',lineCap:'round',lineJoin:'round'})
+      .bindTooltip(`A piedi: ${r.name} · ${(item.distance/1000).toFixed(1)} km · cache`).addTo(walkingReal);
+    return true;
+  }
+  window.exportWalkingRoutesV121=function(){
+    const cache=readWalkCache();
+    const total=Object.values(cache).reduce((n,a)=>n+(Array.isArray(a)?a.length:0),0);
+    console.log('[V12.1] percorsi in cache:',total,cache);
+    if(!total){alert('Nessun percorso ancora salvato. Apri Sabato, Domenica e Lunedì e attendi il caricamento.');return;}
+    const payload={generatedAt:new Date().toISOString(),type:'walking-routes-v121',days:cache};
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+    const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='percorsi-barcellona-v13.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  };
+
   const FOOT='https://routing.openstreetmap.de/routed-foot/route/v1/driving/';
   function routeFoot(points){
     const coords=points.map(p=>`${p[1]},${p[0]}`).join(';');
@@ -317,9 +352,14 @@
 
   async function loadWalkingForDay(day){
     walkingReal.clearLayers();
+    if(!day || !Array.isArray(day.walkRoutes)){
+      console.warn('[V12.1] giorno/percorso non valido:',day);
+      return;
+    }
+    const dayId=day.id;
 
     // Costruiamo le route del giorno senza alterare TRIP_DATA.
-    let routes=(day.walkRoutes||[]).map(r=>({name:r.name,points:r.points.map(p=>[p[0],p[1]])}));
+    let routes=day.walkRoutes.map(r=>({name:r.name,points:r.points.map(p=>[p[0],p[1]])}));
 
     if(day.id==='sabato'){
       // Rimuove il vecchio tratto con coordinate del ristorante stimate.
@@ -346,8 +386,10 @@
 
     for(let i=0;i<routes.length;i++){
       const r=routes[i];
+      if(renderCachedWalk(dayId,r)) continue;
       try{
         const data=await routeFoot(r.points);
+        saveWalkRoute(dayId,r,data);
         const latlngs=data.geometry.coordinates.map(c=>[c[1],c[0]]);
         L.polyline(latlngs,{
           color:r.backup?'#6f7d8a':'#1976d2',
@@ -446,18 +488,27 @@
   // Patch day selection: app.js renderDay is global in this site.
   const originalRender=window.renderDay;
   if(typeof originalRender==='function'){
-    window.renderDay=function(dayId){
-      originalRender(dayId);
-      if(map.hasLayer(walkingReal)) loadWalkingForDay(TRIP_DATA.days.find(d=>d.id===dayId));
+    window.renderDay=function(dayOrId){
+      const day=(typeof dayOrId==='string') ? TRIP_DATA.days.find(d=>d.id===dayOrId) : dayOrId;
+      if(!day){console.warn('[V12.1] renderDay: giorno non trovato',dayOrId);return;}
+      originalRender(day);
+      if(map.hasLayer(walkingReal)) loadWalkingForDay(day).catch(e=>console.warn('[V12.1] walking',e));
     };
   }
 
-  Promise.allSettled([loadMetro(),loadFood(),loadPlannedFoodReal()]).then(async results=>{
-    const m=results[0].status==='fulfilled', f=results[1].status==='fulfilled', p=results[2].status==='fulfilled';
+  if(controls && !document.getElementById('exportWalkingV121')){
+    const btn=document.createElement('button');btn.id='exportWalkingV121';btn.type='button';btn.textContent='Scarica percorsi';
+    btn.style.cssText='padding:7px 10px;border:1px solid #243782;border-radius:8px;background:#fff;color:#243782;font-weight:700;cursor:pointer';
+    btn.onclick=window.exportWalkingRoutesV121;controls.appendChild(btn);
+  }
+
+  // V12.1 cattura: niente Overpass per food/POI. Serve solo a congelare i percorsi pedonali.
+  Promise.allSettled([loadMetro()]).then(async results=>{
+    const m=results[0].status==='fulfilled', f=false, p=false;
     const el=document.getElementById('liveStatus');
     if(m){
       const src=results[0].value && results[0].value.source==='snapshot-v12' ? 'snapshot v12' : (results[0].value && results[0].value.source==='cache' ? 'cache locale' : 'dati OSM');
-      el.innerHTML='✓ Metro caricata da '+src+(f?' · fast food caricati':'')+(p?' · ristoranti pianificati geolocalizzati':'');
+      el.innerHTML='✓ V12.1 cattura · Metro '+src+' · apri i 3 giorni, poi Scarica percorsi';
     }else{
       el.innerHTML='Metro: serve una prima connessione per creare la cache locale';
     }
