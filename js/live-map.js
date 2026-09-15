@@ -17,6 +17,8 @@
   const liveFood=L.layerGroup().addTo(map);
   window.liveFood=liveFood; // v12: accessibile anche dalla console
   const plannedFoodReal=L.layerGroup().addTo(map);
+  const liveNearby=L.layerGroup();
+  let liveNearbyLoaded=false;
 
   // POI pianificati: niente coordinate stimate.
   // Vengono risolti live su OSM per nome/indirizzo e gli stessi punti
@@ -44,6 +46,17 @@
   ['s-rincon','s-donsand'].forEach(id=>{
     const x=V12_POI_BY_ID[id];
     if(x&&Number.isFinite(x.lat)&&Number.isFinite(x.lng)) resolvedPOI[id]=[x.lat,x.lng];
+  });
+
+  // V13.1: i due ristoranti del sabato vengono mostrati da snapshot locale verificato.
+  ['s-rincon','s-donsand'].forEach(id=>{
+    const x=V12_POI_BY_ID[id];
+    if(!x || !Number.isFinite(x.lat) || !Number.isFinite(x.lng)) return;
+    const ic=L.divIcon({className:'',html:'<div class="amenity-marker restaurant">🍴</div>',iconSize:[38,38],iconAnchor:[19,19]});
+    const dest=encodeURIComponent(x.address||x.name);
+    L.marker([x.lat,x.lng],{icon:ic}).bindTooltip(x.name,{direction:'top'})
+      .bindPopup(`<div class="amenity-popup"><b>🍴 ${x.name}</b><div class="small">${x.when||''}</div><div>${x.note||''}</div><a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${dest}">🧭 Portami qui</a></div>`)
+      .addTo(plannedFoodReal);
   });
 
 
@@ -397,31 +410,55 @@
     }
   }
   async function loadFood(){
-    const embedded=(window.V12_SNAPSHOT&&window.V12_SNAPSHOT.fastfood&&window.V12_SNAPSHOT.fastfood.items)||[];
-    if(embedded.length){
-      embedded.forEach(x=>{
-        if(!Number.isFinite(x.lat)||!Number.isFinite(x.lng)) return;
-        const ic=L.divIcon({className:'',html:'<div class="amenity-marker fastfood">🍔</div>',iconSize:[38,38],iconAnchor:[19,19]});
-        L.marker([x.lat,x.lng],{icon:ic}).bindTooltip(x.name||'Fast food',{direction:'top'}).bindPopup(x.popup||('<b>🍔 '+(x.name||'Fast food')+'</b>')).addTo(liveFood);
-      });
-      return {source:'snapshot-v12',count:embedded.length};
-    }
-    const q=`[out:json][timeout:35];
-      nwr["amenity"="fast_food"](41.30,2.07,41.415,2.215);
-      out center tags;`;
-    const data=await overpass(q);
-    data.elements.forEach(el=>{
-      const tg=el.tags||{}; if(!tg.name)return;
-      const c=el.lat!=null?[el.lat,el.lon]:(el.center?[el.center.lat,el.center.lon]:null);
-      if(!c)return;
-      const addr=[tg['addr:street'],tg['addr:housenumber']].filter(Boolean).join(' ');
-      const dest=encodeURIComponent(addr?`${tg.name}, ${addr}, Barcelona`:`${tg.name}, Barcelona`);
+    // V13.1: fast food verificati già presenti nello snapshot POI, nessuna chiamata live automatica.
+    const days=(window.V12_SNAPSHOT&&window.V12_SNAPSHOT.poi&&window.V12_SNAPSHOT.poi.days)||{};
+    const embedded=Object.values(days).flat().filter(x=>x && x.type==='fastfood' && x.verified===true);
+    liveFood.clearLayers();
+    embedded.forEach(x=>{
+      if(!Number.isFinite(x.lat)||!Number.isFinite(x.lng)) return;
+      const dest=encodeURIComponent(x.address||x.name);
       const ic=L.divIcon({className:'',html:'<div class="amenity-marker fastfood">🍔</div>',iconSize:[38,38],iconAnchor:[19,19]});
-      L.marker(c,{icon:ic}).bindTooltip(tg.name,{direction:'top'})
-       .bindPopup(`<div class="amenity-popup"><b>🍔 ${tg.name}</b><div class="small">Fast food reale da OpenStreetMap</div>${addr?`<div>${addr}</div>`:''}<a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${dest}">🧭 Portami qui</a></div>`)
+      L.marker([x.lat,x.lng],{icon:ic}).bindTooltip(x.name||'Fast food',{direction:'top'})
+       .bindPopup(`<div class="amenity-popup"><b>🍔 ${x.name}</b><div class="small">Fast food verificato · precaricato</div><div>${x.note||''}</div><a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${dest}">🧭 Portami qui</a></div>`)
        .addTo(liveFood);
     });
+    return {source:'snapshot-poi',count:embedded.length};
   }
+
+  async function loadLiveNearby(){
+    const b=map.getBounds();
+    const south=b.getSouth(), west=b.getWest(), north=b.getNorth(), east=b.getEast();
+    const q=`[out:json][timeout:25];(
+      nwr["amenity"="restaurant"](${south},${west},${north},${east});
+      nwr["amenity"="toilets"](${south},${west},${north},${east});
+    );out center tags;`;
+    const statusEl=document.getElementById('liveStatus');
+    if(statusEl) statusEl.textContent='Ricerca live di ristoranti e bagni nella zona visibile...';
+    const data=await overpass(q);
+    liveNearby.clearLayers();
+    let count=0;
+    (data.elements||[]).forEach(el=>{
+      const tg=el.tags||{};
+      const c=el.lat!=null?[el.lat,el.lon]:(el.center?[el.center.lat,el.center.lon]:null);
+      if(!c) return;
+      const isWc=tg.amenity==='toilets';
+      const name=tg.name || (isWc?'Bagno pubblico':'Ristorante');
+      const emoji=isWc?'🚻':'🍴';
+      const klass=isWc?'wc':'restaurant';
+      const addr=[tg['addr:street'],tg['addr:housenumber']].filter(Boolean).join(' ');
+      const dest=encodeURIComponent(addr?`${name}, ${addr}, Barcelona`:`${c[0]},${c[1]}`);
+      const details=[addr, tg.opening_hours?`Orari OSM: ${tg.opening_hours}`:'', isWc&&tg.fee?`Pagamento: ${tg.fee}`:''].filter(Boolean).join('<br>');
+      const ic=L.divIcon({className:'',html:`<div class="amenity-marker ${klass}">${emoji}</div>`,iconSize:[34,34],iconAnchor:[17,17]});
+      L.marker(c,{icon:ic}).bindTooltip(name,{direction:'top'})
+       .bindPopup(`<div class="amenity-popup"><b>${emoji} ${name}</b><div class="small">Dato live OpenStreetMap · zona visibile</div>${details?`<div>${details}</div>`:''}<a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${dest}">🧭 Portami qui</a></div>`)
+       .addTo(liveNearby);
+      count++;
+    });
+    liveNearbyLoaded=true;
+    if(statusEl) statusEl.textContent=`✓ Live: ${count} ristoranti/bagni trovati nella zona visibile`;
+    return count;
+  }
+
 
   // Disable/remove old schematic layers completely.
   if(map.hasLayer(metroLayer)) map.removeLayer(metroLayer);
@@ -444,6 +481,14 @@
   }
   const foodToggle=document.getElementById('toggleLiveFood');
   if(foodToggle) foodToggle.onchange=e=>e.target.checked?liveFood.addTo(map):map.removeLayer(liveFood);
+  const nearbyToggle=document.getElementById('toggleLiveNearby');
+  if(nearbyToggle){
+    nearbyToggle.onchange=async e=>{
+      if(!e.target.checked){ map.removeLayer(liveNearby); return; }
+      try{ await loadLiveNearby(); liveNearby.addTo(map); }
+      catch(err){ e.target.checked=false; map.removeLayer(liveNearby); const el=document.getElementById('liveStatus'); if(el)el.textContent='Live non disponibile: riprova tra poco'; console.warn('[V13.1] live nearby',err); }
+    };
+  }
   const plannedToggle=document.getElementById('toggleFood');
   if(plannedToggle){
     plannedToggle.onchange=e=>{
@@ -485,12 +530,12 @@
 
 
   // V12.1 cattura: niente Overpass per food/POI. Serve solo a congelare i percorsi pedonali.
-  Promise.allSettled([loadMetro()]).then(async results=>{
-    const m=results[0].status==='fulfilled', f=false, p=false;
+  Promise.allSettled([loadMetro(),loadFood()]).then(async results=>{
+    const m=results[0].status==='fulfilled', f=results[1].status==='fulfilled';
     const el=document.getElementById('liveStatus');
     if(m){
       const src=results[0].value && results[0].value.source==='snapshot-v12' ? 'snapshot v12' : (results[0].value && results[0].value.source==='cache' ? 'cache locale' : 'dati OSM');
-      el.innerHTML='✓ V13 locale · Metro '+src+' · percorsi a piedi precaricati';
+      el.innerHTML='✓ V13.1 locale · Metro '+src+' · percorsi a piedi · fast food precaricati';
     }else{
       el.innerHTML='Metro: serve una prima connessione per creare la cache locale';
     }
