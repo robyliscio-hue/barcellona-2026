@@ -1,13 +1,3 @@
-# Barcellona 2026 - v12.1 cattura percorsi
+Barcellona 2026 - Mappa v13 locale
 
-Versione temporanea per catturare e salvare localmente le geometrie pedonali.
-
-1. Pubblicare sovrascrivendo la v12.
-2. Fare un hard refresh / attendere aggiornamento service worker.
-3. Aprire Sabato e attendere che i percorsi blu compaiano.
-4. Aprire Domenica e attendere.
-5. Aprire Lunedi e attendere.
-6. Premere **Scarica percorsi** nei controlli mappa.
-7. Allegare `percorsi-barcellona-v13.json` in chat.
-
-Questa build disabilita volutamente le chiamate Overpass per fast food e geolocalizzazione POI durante la cattura.
+Metro e percorsi a piedi sono inglobati nel sito. Non serve Overpass per caricare la rete metro o il routing pedonale.

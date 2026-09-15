@@ -306,7 +306,13 @@
 
   const WALK_CACHE_KEY='barcellona.walking.v121';
   function readWalkCache(){
-    try{return JSON.parse(localStorage.getItem(WALK_CACHE_KEY)||'{}')||{};}catch(e){return {};}
+    try{
+      const local=JSON.parse(localStorage.getItem(WALK_CACHE_KEY)||'{}')||{};
+      const embedded=(window.V12_SNAPSHOT&&window.V12_SNAPSHOT.walking&&window.V12_SNAPSHOT.walking.days)||{};
+      return Object.assign({}, embedded, local);
+    }catch(e){
+      return (window.V12_SNAPSHOT&&window.V12_SNAPSHOT.walking&&window.V12_SNAPSHOT.walking.days)||{};
+    }
   }
   function writeWalkCache(cache){
     try{localStorage.setItem(WALK_CACHE_KEY,JSON.stringify(cache));}catch(e){console.warn('Cache percorsi non salvata',e);}
@@ -387,26 +393,7 @@
     for(let i=0;i<routes.length;i++){
       const r=routes[i];
       if(renderCachedWalk(dayId,r)) continue;
-      try{
-        const data=await routeFoot(r.points);
-        saveWalkRoute(dayId,r,data);
-        const latlngs=data.geometry.coordinates.map(c=>[c[1],c[0]]);
-        L.polyline(latlngs,{
-          color:r.backup?'#6f7d8a':'#1976d2',
-          weight:r.primary?6:5,
-          opacity:r.backup?.62:.84,
-          dashArray:r.backup?'4 8':'8 7',
-          lineCap:'round',lineJoin:'round'
-        }).bindTooltip(`A piedi: ${r.name} · ${(data.distance/1000).toFixed(1)} km`)
-          .addTo(walkingReal);
-      }catch(e){
-        r.points.forEach((p,idx)=>{
-          if(idx===0||idx===r.points.length-1)
-            L.circleMarker(p,{radius:3,color:'#1976d2',weight:2,fillOpacity:0})
-             .bindTooltip(`Percorso pedonale da caricare: ${r.name}`).addTo(walkingReal);
-        });
-      }
-      await new Promise(res=>setTimeout(res,1050));
+      console.warn('[V13] percorso locale non trovato:',dayId,r.name);
     }
   }
   async function loadFood(){
@@ -490,17 +477,12 @@
   if(typeof originalRender==='function'){
     window.renderDay=function(dayOrId){
       const day=(typeof dayOrId==='string') ? TRIP_DATA.days.find(d=>d.id===dayOrId) : dayOrId;
-      if(!day){console.warn('[V12.1] renderDay: giorno non trovato',dayOrId);return;}
+      if(!day){console.warn('[V13] renderDay: giorno non trovato',dayOrId);return;}
       originalRender(day);
-      if(map.hasLayer(walkingReal)) loadWalkingForDay(day).catch(e=>console.warn('[V12.1] walking',e));
+      if(map.hasLayer(walkingReal)) loadWalkingForDay(day).catch(e=>console.warn('[V13] walking',e));
     };
   }
 
-  if(controls && !document.getElementById('exportWalkingV121')){
-    const btn=document.createElement('button');btn.id='exportWalkingV121';btn.type='button';btn.textContent='Scarica percorsi';
-    btn.style.cssText='padding:7px 10px;border:1px solid #243782;border-radius:8px;background:#fff;color:#243782;font-weight:700;cursor:pointer';
-    btn.onclick=window.exportWalkingRoutesV121;controls.appendChild(btn);
-  }
 
   // V12.1 cattura: niente Overpass per food/POI. Serve solo a congelare i percorsi pedonali.
   Promise.allSettled([loadMetro()]).then(async results=>{
@@ -508,7 +490,7 @@
     const el=document.getElementById('liveStatus');
     if(m){
       const src=results[0].value && results[0].value.source==='snapshot-v12' ? 'snapshot v12' : (results[0].value && results[0].value.source==='cache' ? 'cache locale' : 'dati OSM');
-      el.innerHTML='✓ V12.1 cattura · Metro '+src+' · apri i 3 giorni, poi Scarica percorsi';
+      el.innerHTML='✓ V13 locale · Metro '+src+' · percorsi a piedi precaricati';
     }else{
       el.innerHTML='Metro: serve una prima connessione per creare la cache locale';
     }
