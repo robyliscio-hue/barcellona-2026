@@ -31,6 +31,7 @@ function renderDay(day){
    m.bindTooltip(s.name,{direction:'top',offset:[0,-14]});m.on('click',()=>openStop(s));markerMap.set(s.id,m);
  });
  (day.amenities||[]).forEach(a=>{
+   if(a.id==='s-rincon' || a.id==='s-donsand') return; // V9: geolocalizzati live in live-map.js
    const emoji=a.type==='wc'?'🚻':(a.type==='fastfood'?'🍔':'🍴');
    const ic=L.divIcon({className:'',html:`<div class="amenity-marker ${a.type}">${emoji}</div>`,iconSize:[34,34],iconAnchor:[17,17]});
    const dest=encodeURIComponent(a.address||a.name);

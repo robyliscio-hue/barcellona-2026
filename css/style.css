@@ -57,3 +57,46 @@ main{flex:1;min-height:0}.view{display:none;height:100%;overflow:auto}.view.acti
 .metro-name{font-weight:800}
 .metro-lines{display:flex;gap:2px}
 .line-badge{color:#fff;font-size:8px;font-weight:900;border-radius:7px;padding:1px 4px;text-shadow:0 1px 1px rgba(0,0,0,.35)}
+
+.amenity-marker.planned-real{border-width:3px;box-shadow:0 2px 9px rgba(0,0,0,.36)}
+
+/* V10 - fermate metro compatte: solo M + badge linea */
+.metro-stop-v10{
+  display:flex;
+  align-items:center;
+  gap:3px;
+  background:rgba(255,255,255,.97);
+  border:1px solid #9fa8b3;
+  border-radius:14px;
+  padding:2px 4px 2px 2px;
+  box-shadow:0 1px 4px rgba(0,0,0,.22);
+  white-space:nowrap;
+}
+.metro-stop-v10.used{
+  border:2px solid #243782;
+  box-shadow:0 2px 6px rgba(0,0,0,.28);
+}
+.metro-stop-v10 .metro-symbol{
+  width:22px;
+  height:22px;
+  flex:0 0 22px;
+}
+.metro-stop-v10 .metro-lines{
+  display:flex;
+  gap:2px;
+}
+.metro-stop-v10 .line-badge{
+  font-size:8px;
+  padding:1px 3px;
+}
+
+/* V11: priorità visiva alle sole fermate del viaggio */
+.metro-stop-v11.used{
+  display:flex;align-items:center;gap:3px;background:rgba(255,255,255,.98);
+  border:2px solid #243782;border-radius:14px;padding:2px 4px 2px 2px;
+  box-shadow:0 2px 6px rgba(0,0,0,.28);white-space:nowrap;
+}
+.metro-stop-v11.minor{
+  width:7px;height:7px;border-radius:50%;
+  background:#fff;border:2px solid #777;box-shadow:0 1px 2px rgba(0,0,0,.22);
+}

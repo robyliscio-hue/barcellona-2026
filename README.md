@@ -51,3 +51,12 @@ Allineata alla guida SABATO_LINEARE.
 - Il nome della fermata non compare più sempre a video.
 - Toccando/cliccando la fermata si apre il popup con nome e linee.
 - Le fermate usate nel viaggio restano leggermente evidenziate nel bordo, senza testo aggiuntivo.
+
+
+## V11 - metro persistente e fermate prioritarie
+- La rete metro scaricata da OSM viene salvata in localStorage e riutilizzata alle aperture successive.
+- Se la cache esiste, un eventuale problema Overpass non fa sparire la metro.
+- Sono configurati più endpoint Overpass per il primo caricamento/aggiornamento.
+- Fermate usate nel viaggio: M + badge linea, bordo evidenziato.
+- Fermate non usate: piccolo punto discreto, comunque cliccabile per nome/linea.
+- Il refresh dei dati metro avviene in modo silenzioso quando la cache è già disponibile.
