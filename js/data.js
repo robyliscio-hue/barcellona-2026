@@ -913,34 +913,34 @@ const TRIP_DATA={
           "verified": true
         },
         {
-          "id": "wc-plapalau-s",
+          "id": "wc-moll-fusta-s",
           "type": "wc",
-          "name": "WC pubblico - Pla de Palau",
-          "lat": 41.3833,
-          "lng": 2.183,
-          "address": "Pla de Palau, Barcelona",
-          "note": "WC pubblico nell'area Ciutat Vella, utile tra Born e Port Vell.",
-          "when": "se serve"
+          "name": "WC pubblico - Moll de la Fusta",
+          "lat": 41.37583,
+          "lng": 2.17889,
+          "address": "Moll de Bosch i Alsina, 1, Barcelona",
+          "note": "WC pubblico comunale presso Moll de la Fusta, vicino alla torre di controllo; presente unita adattata.",
+          "when": "Port Vell / Colombo"
         },
         {
           "id": "wc-born-s",
           "type": "wc",
-          "name": "WC pubblico stagionale - Passeig del Born",
-          "lat": 41.3842,
-          "lng": 2.1835,
+          "name": "WC stagionale - Passeig del Born",
+          "lat": 41.384897,
+          "lng": 2.183044,
           "address": "Carrer del Rec / Passeig del Born, Barcelona",
-          "note": "Servizio stagionale indicato fino al 30 settembre; da verificare sul posto.",
-          "when": "se serve"
+          "note": "Servizio stagionale comunale indicato fino al 30 settembre; utile durante il passaggio nel Born.",
+          "when": "Born"
         },
         {
           "id": "wc-barcel-s",
           "type": "wc",
-          "name": "WC pubblico - Passeig Maritim Barceloneta",
+          "name": "WC zona spiaggia - Barceloneta",
           "lat": 41.3782,
           "lng": 2.1938,
           "address": "Passeig Maritim de la Barceloneta, Barcelona",
-          "note": "WC pubblico / servizio spiaggia nell'area Barceloneta.",
-          "when": "se serve"
+          "note": "Servizio WC nell area spiaggia/Barceloneta. Verificare apertura sul posto.",
+          "when": "Barceloneta"
         }
       ],
       "walkRoutes": [
@@ -1935,32 +1935,32 @@ const TRIP_DATA={
         {
           "id": "wc-ciuta",
           "type": "wc",
-          "name": "WC - Parc de la Ciutadella",
+          "name": "WC pubblico - Parc de la Ciutadella",
           "lat": 41.3882,
           "lng": 2.1877,
-          "address": "Parc de la Ciutadella, Barcelona",
-          "note": "Nel parco risultano servizi igienici, inclusi servizi accessibili.",
-          "when": "se serve"
+          "address": "Parc de la Ciutadella - zona Cascada, Barcelona",
+          "note": "WC pubblico indicato dal Comune all interno della guingueta-bar della zona Cascada.",
+          "when": "Ciutadella"
         },
         {
-          "id": "wc-palau-d",
+          "id": "wc-born-d",
           "type": "wc",
-          "name": "WC pubblico - Pla de Palau",
-          "lat": 41.3833,
-          "lng": 2.183,
-          "address": "Pla de Palau, Barcelona",
-          "note": "WC pubblico permanente in Ciutat Vella.",
+          "name": "WC stagionale - Passeig del Born",
+          "lat": 41.384897,
+          "lng": 2.183044,
+          "address": "Carrer del Rec / Passeig del Born, Barcelona",
+          "note": "Servizio stagionale comunale indicato fino al 30 settembre.",
           "when": "se serve"
         },
         {
           "id": "wc-barcel-d",
           "type": "wc",
-          "name": "WC pubblico - Passeig Maritim Barceloneta",
+          "name": "WC zona spiaggia - Barceloneta",
           "lat": 41.3782,
           "lng": 2.1938,
           "address": "Passeig Maritim de la Barceloneta, Barcelona",
-          "note": "WC pubblico / servizio spiaggia nell'area Barceloneta.",
-          "when": "se serve"
+          "note": "Servizio WC nell area spiaggia/Barceloneta. Verificare apertura sul posto.",
+          "when": "spiaggia"
         }
       ],
       "walkRoutes": [
@@ -2255,8 +2255,8 @@ const TRIP_DATA={
           "lat": 41.30385,
           "lng": 2.07428,
           "address": "Barcelona El Prat Airport Terminal 2",
-          "note": "Servizi igienici disponibili in aeroporto.",
-          "when": "arrivo T2"
+          "note": "Servizi igienici disponibili nel Terminal 2.",
+          "when": "prima del volo"
         }
       ],
       "walkRoutes": [

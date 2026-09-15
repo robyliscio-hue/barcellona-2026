@@ -100,3 +100,11 @@ main{flex:1;min-height:0}.view{display:none;height:100%;overflow:auto}.view.acti
   width:7px;height:7px;border-radius:50%;
   background:#fff;border:2px solid #777;box-shadow:0 1px 2px rgba(0,0,0,.22);
 }
+
+/* V13.2 - indicazioni operative SALI / SCENDI */
+.metro-action-wrap{background:transparent;border:0;}
+.metro-action-stack{display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:auto;}
+.metro-action{background:#fff;border:2px solid #243782;border-radius:12px;padding:3px 7px;font-size:10px;font-weight:800;color:#16214a;box-shadow:0 2px 6px rgba(0,0,0,.28);white-space:nowrap;line-height:1.1;}
+.metro-action.up{border-color:#18864b;}
+.metro-action.down{border-color:#c4473a;}
+@media(max-width:600px){.metro-action{font-size:9px;padding:3px 5px}.metro-action-stack{transform:scale(.92)}}

@@ -13,6 +13,7 @@
   */
 
   const metroReal=L.layerGroup().addTo(map);
+  const metroActions=L.layerGroup().addTo(map); // V13.2 SALI/SCENDI sul percorso
   const walkingReal=L.layerGroup().addTo(map);
   const liveFood=L.layerGroup().addTo(map);
   window.liveFood=liveFood; // v12: accessibile anche dalla console
@@ -60,6 +61,36 @@
   });
 
 
+
+  function lineFromSegment(seg){
+    const m=(seg.name||'').match(/^(L\d+(?:\s*Sud|\s*Nord)?)/i);
+    return m?m[1].replace(/\s+/g,' '):'Metro';
+  }
+  function renderMetroActions(day){
+    metroActions.clearLayers();
+    if(!day || !Array.isArray(day.metro)) return;
+    const byStop=new Map();
+    day.metro.forEach(seg=>{
+      const st=seg.stations||[]; if(st.length<2) return;
+      const line=lineFromSegment(seg);
+      const add=(station,kind)=>{
+        const key=station.name+'|'+station.lat.toFixed(5)+'|'+station.lng.toFixed(5);
+        if(!byStop.has(key)) byStop.set(key,{station,items:[]});
+        byStop.get(key).items.push({kind,line,segment:seg.name,color:seg.color});
+      };
+      add(st[0],'up'); add(st[st.length-1],'down');
+    });
+    byStop.forEach(({station,items})=>{
+      // Se nello stesso punto si scende e si risale, mostra entrambe le azioni: e il cambio linea.
+      const html=items.map(x=>`<span class="metro-action ${x.kind}">${x.kind==='up'?'↑ SALI':'↓ SCENDI'} <b>${x.line}</b></span>`).join('');
+      const popup=items.map(x=>`<div><b>${x.kind==='up'?'↑ SALI':'↓ SCENDI'} ${x.line}</b><br><span class="small">${x.segment}</span></div>`).join('<hr>');
+      const ic=L.divIcon({className:'metro-action-wrap',html:`<div class="metro-action-stack">${html}</div>`,iconSize:[145,44],iconAnchor:[72,22]});
+      L.marker([station.lat,station.lng],{icon:ic,interactive:true,zIndexOffset:900})
+       .bindTooltip(station.name,{direction:'top',offset:[0,-18]})
+       .bindPopup(`<div class="amenity-popup"><b>🚇 ${station.name}</b>${popup}</div>`)
+       .addTo(metroActions);
+    });
+  }
   const METRO_COLORS={
     'L1':'#d71920',
     'L2':'#8f5ba6',
@@ -524,6 +555,7 @@
       const day=(typeof dayOrId==='string') ? TRIP_DATA.days.find(d=>d.id===dayOrId) : dayOrId;
       if(!day){console.warn('[V13] renderDay: giorno non trovato',dayOrId);return;}
       originalRender(day);
+        renderMetroActions(day);
       if(map.hasLayer(walkingReal)) loadWalkingForDay(day).catch(e=>console.warn('[V13] walking',e));
     };
   }
