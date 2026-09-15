@@ -108,3 +108,11 @@ main{flex:1;min-height:0}.view{display:none;height:100%;overflow:auto}.view.acti
 .metro-action.up{border-color:#18864b;}
 .metro-action.down{border-color:#c4473a;}
 @media(max-width:600px){.metro-action{font-size:9px;padding:3px 5px}.metro-action-stack{transform:scale(.92)}}
+
+/* V13.3 - badge SALI/SCENDI sempre leggibili sopra la rete metro */
+.metro-action-wrap{background:transparent!important;border:0!important;overflow:visible!important;}
+.metro-action-stack{display:flex;flex-direction:column;align-items:center;gap:3px;pointer-events:auto;filter:drop-shadow(0 2px 3px rgba(0,0,0,.28));}
+.metro-action{display:block;background:#fff;border:3px solid #243782;border-radius:14px;padding:4px 8px;font-size:11px;font-weight:900;color:#111b3f;white-space:nowrap;line-height:1.15;}
+.metro-action.up{border-color:#168447}.metro-action.down{border-color:#c53d32}
+.metro-action-arrow{font-size:14px;font-weight:900}.metro-action small{font-size:9px;font-weight:800}
+@media(max-width:600px){.metro-action{font-size:10px;padding:4px 6px}.metro-action small{font-size:8px}.metro-action-stack{transform:scale(.95)}}

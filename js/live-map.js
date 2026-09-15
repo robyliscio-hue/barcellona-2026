@@ -66,6 +66,11 @@
     const m=(seg.name||'').match(/^(L\d+(?:\s*Sud|\s*Nord)?)/i);
     return m?m[1].replace(/\s+/g,' '):'Metro';
   }
+  function destinationFromSegment(seg){
+    const name=seg.name||'';
+    const parts=name.split('->');
+    return parts.length>1?parts[parts.length-1].trim():'';
+  }
   function renderMetroActions(day){
     metroActions.clearLayers();
     if(!day || !Array.isArray(day.metro)) return;
@@ -73,20 +78,27 @@
     day.metro.forEach(seg=>{
       const st=seg.stations||[]; if(st.length<2) return;
       const line=lineFromSegment(seg);
+      const destination=destinationFromSegment(seg);
       const add=(station,kind)=>{
-        const key=station.name+'|'+station.lat.toFixed(5)+'|'+station.lng.toFixed(5);
+        if(!station || !Number.isFinite(Number(station.lat)) || !Number.isFinite(Number(station.lng))) return;
+        const key=Number(station.lat).toFixed(4)+'|'+Number(station.lng).toFixed(4);
         if(!byStop.has(key)) byStop.set(key,{station,items:[]});
-        byStop.get(key).items.push({kind,line,segment:seg.name,color:seg.color});
+        byStop.get(key).items.push({kind,line,destination,segment:seg.name,color:seg.color});
       };
-      add(st[0],'up'); add(st[st.length-1],'down');
+      add(st[0],'up');
+      add(st[st.length-1],'down');
     });
     byStop.forEach(({station,items})=>{
-      // Se nello stesso punto si scende e si risale, mostra entrambe le azioni: e il cambio linea.
-      const html=items.map(x=>`<span class="metro-action ${x.kind}">${x.kind==='up'?'↑ SALI':'↓ SCENDI'} <b>${x.line}</b></span>`).join('');
-      const popup=items.map(x=>`<div><b>${x.kind==='up'?'↑ SALI':'↓ SCENDI'} ${x.line}</b><br><span class="small">${x.segment}</span></div>`).join('<hr>');
-      const ic=L.divIcon({className:'metro-action-wrap',html:`<div class="metro-action-stack">${html}</div>`,iconSize:[145,44],iconAnchor:[72,22]});
-      L.marker([station.lat,station.lng],{icon:ic,interactive:true,zIndexOffset:900})
-       .bindTooltip(station.name,{direction:'top',offset:[0,-18]})
+      const html=items.map(x=>{
+        const arrow=x.kind==='up'?'⬆':'⬇';
+        const action=x.kind==='up'?'SALI':'SCENDI';
+        const dest=(x.kind==='up' && x.destination)?`<small> → ${x.destination}</small>`:'';
+        return `<span class="metro-action ${x.kind}"><span class="metro-action-arrow">${arrow}</span> ${action} <b>${x.line}</b>${dest}</span>`;
+      }).join('');
+      const popup=items.map(x=>`<div><b>${x.kind==='up'?'⬆ SALI':'⬇ SCENDI'} ${x.line}</b>${x.kind==='up'&&x.destination?`<br>Direzione <b>${x.destination}</b>`:''}<br><span class="small">${x.segment}</span></div>`).join('<hr>');
+      const ic=L.divIcon({className:'metro-action-wrap',html:`<div class="metro-action-stack">${html}</div>`,iconSize:[205,58],iconAnchor:[102,29]});
+      L.marker([Number(station.lat),Number(station.lng)],{icon:ic,interactive:true,zIndexOffset:5000,pane:'markerPane'})
+       .bindTooltip(station.name,{direction:'top',offset:[0,-24]})
        .bindPopup(`<div class="amenity-popup"><b>🚇 ${station.name}</b>${popup}</div>`)
        .addTo(metroActions);
     });
@@ -517,7 +529,7 @@
     nearbyToggle.onchange=async e=>{
       if(!e.target.checked){ map.removeLayer(liveNearby); return; }
       try{ await loadLiveNearby(); liveNearby.addTo(map); }
-      catch(err){ e.target.checked=false; map.removeLayer(liveNearby); const el=document.getElementById('liveStatus'); if(el)el.textContent='Live non disponibile: riprova tra poco'; console.warn('[V13.1] live nearby',err); }
+      catch(err){ e.target.checked=false; map.removeLayer(liveNearby); const el=document.getElementById('liveStatus'); if(el)el.textContent='Live non disponibile: riprova tra poco'; console.warn('[V13.3] live nearby',err); }
     };
   }
   const plannedToggle=document.getElementById('toggleFood');
@@ -560,6 +572,10 @@
     };
   }
 
+  // V13.3: app.js ha gia renderizzato il sabato prima che questo file venga caricato.
+  // Disegniamo quindi subito le azioni metro anche al primo caricamento.
+  renderMetroActions(currentDay());
+
 
   // V12.1 cattura: niente Overpass per food/POI. Serve solo a congelare i percorsi pedonali.
   Promise.allSettled([loadMetro(),loadFood()]).then(async results=>{
@@ -567,7 +583,7 @@
     const el=document.getElementById('liveStatus');
     if(m){
       const src=results[0].value && results[0].value.source==='snapshot-v12' ? 'snapshot v12' : (results[0].value && results[0].value.source==='cache' ? 'cache locale' : 'dati OSM');
-      el.innerHTML='✓ V13.1 locale · Metro '+src+' · percorsi a piedi · fast food precaricati';
+      el.innerHTML='✓ V13.3 locale · Metro '+src+' · percorsi a piedi · fast food precaricati';
     }else{
       el.innerHTML='Metro: serve una prima connessione per creare la cache locale';
     }

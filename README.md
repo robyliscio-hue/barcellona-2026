@@ -1,5 +1,1 @@
-V13.2 - SALI/SCENDI metro + WC statici aggiornati lungo itinerario.
-
-Barcellona 2026 - Mappa v13 locale
-
-Metro e percorsi a piedi sono inglobati nel sito. Non serve Overpass per caricare la rete metro o il routing pedonale.
+V13.3 - SALI/SCENDI metro espliciti e sempre visibili + WC statici lungo itinerario.\n\nMetro e percorsi a piedi sono inglobati nel sito. I badge metro mostrano linea e direzione nei punti di salita/discesa.\n
