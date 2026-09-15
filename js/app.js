@@ -69,11 +69,26 @@ function playlistHtml(itemId,audios){
  if(!audios||!audios.length)return `<div class="audio-box"><div class="audio-label">🎧 AUDIOGUIDA</div><div class="stop-meta">Nessuna audioguida associata a questa tappa.</div></div>`;
  return `<div class="audio-box"><div class="audio-label">🎧 AUDIOGUIDA · ${audios.length} ${audios.length===1?'TRACCIA':'TRACCE'}</div><div class="playlist">${audios.map((a,i)=>{const l=localStorage.getItem(trackKey(itemId,i))==='1';return `<button class="track-row ${l?'listened':''}" onclick="selectTrack('${itemId}',${i})"><span class="track-play">▶</span><span class="track-title">${a.title}</span><span class="track-state">${l?'✓':''}</span></button>`}).join('')}</div><div id="activeTrackBox" class="active-track" hidden><div id="activeTrackTitle" class="active-track-title"></div><audio id="mainAudioPlayer" controls preload="metadata"></audio></div></div>`;
 }
+const PHOTO_TITLES={
+  's-pedrera':'Casa Milà','s-batllo':'Casa Batlló','s-catalunya':'Plaça de Catalunya','s-rambla':'La Rambla (Barcellona)','s-boqueria':'La Boqueria','s-reial':'Plaça Reial','s-colombo':'Monumento a Cristoforo Colombo (Barcellona)','s-portvell':'Port Vell','s-gotic':'Barri Gòtic','s-born':'El Born','s-santamaria':'Santa Maria del Mar','s-barceloneta':'Barceloneta','d-sagrada':'Sagrada Família','d-glories':'Torre Glòries','d-cattedrale':'Cattedrale di Barcellona','d-arc':'Arc de Triomf (Barcellona)','d-ciutadella':'Parco della Cittadella','d-portolimpic':'Port Olímpic','d-novaicaria':'Platja de la Nova Icària','l-campnou':'Camp Nou'
+};
+function loadStopPhoto(stop){
+  const hero=document.getElementById('heroPhoto'); if(!hero) return;
+  const title=PHOTO_TITLES[stop.id]||stop.name;
+  const url='https://it.wikipedia.org/w/api.php?action=query&origin=*&format=json&prop=pageimages&piprop=original&pithumbsize=1200&titles='+encodeURIComponent(title);
+  fetch(url).then(r=>r.json()).then(j=>{
+    const pages=j&&j.query&&j.query.pages?Object.values(j.query.pages):[];
+    const pg=pages[0]||{}; const src=(pg.original&&pg.original.source)||(pg.thumbnail&&pg.thumbnail.source);
+    if(!src) throw new Error('no photo');
+    hero.innerHTML='<img class="hero-img" alt="'+stop.name.replace(/"/g,'&quot;')+'" src="'+src+'"><div class="hero-caption">'+stop.name+'</div>';
+  }).catch(()=>{ hero.innerHTML='<div class="hero-loading">Foto non disponibile · '+stop.name+'</div>'; });
+}
 function openStop(s){
  const audios=s.audios?AUDIO_LIBRARY[s.audios]:[];
  currentOpen={id:s.id,audios,stop:s};
  const visited=s.n&&localStorage.getItem('visited-'+s.id)==='1';
- document.getElementById('sheetContent').innerHTML=`<div class="hero">FOTO PREDISPOSTA · ${s.name}</div><div class="sheet-body"><div class="kicker">${s.n?'TAPPA '+s.n:'LOGISTICA'} · ${s.time||''}</div><div class="sheet-title">${s.name}</div><div class="sheet-text">${s.description||''}</div>${s.transit?`<div class="transit-box"><strong>🚇 Indicazione</strong><br>${s.transit}</div>`:''}${s.cost?`<div class="transit-box"><strong>Accesso:</strong> ${s.cost}</div>`:''}${playlistHtml(s.id,audios)}<div class="actions"><a class="btn primary" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}">🧭 Portami qui</a><button class="btn secondary" onclick="focusStop('${s.id}')">📍 Mostra in mappa</button>${s.n?`<button class="btn visited" onclick="toggleVisited('${s.id}')">${visited?'✓ Visitato':'○ Segna come visitato'}</button>`:''}</div></div>`;
+ document.getElementById('sheetContent').innerHTML=`<div class="hero hero-photo" id="heroPhoto"><div class="hero-loading">Caricamento foto · ${s.name}</div></div><div class="sheet-body"><div class="kicker">${s.n?'TAPPA '+s.n:'LOGISTICA'} · ${s.time||''}</div><div class="sheet-title">${s.name}</div><div class="sheet-text">${s.description||''}</div>${s.transit?`<div class="transit-box"><strong>🚇 Indicazione</strong><br>${s.transit}</div>`:''}${s.cost?`<div class="transit-box"><strong>Accesso:</strong> ${s.cost}</div>`:''}${playlistHtml(s.id,audios)}<div class="actions"><a class="btn primary" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}">🧭 Portami qui</a><button class="btn secondary" onclick="focusStop('${s.id}')">📍 Mostra in mappa</button>${s.n?`<button class="btn visited" onclick="toggleVisited('${s.id}')">${visited?'✓ Visitato':'○ Segna come visitato'}</button>`:''}</div></div>`;
+ loadStopPhoto(s);
  showSheet();if(audios.length===1)setTimeout(()=>selectTrack(s.id,0),0);
 }
 function openExtra(x,i){

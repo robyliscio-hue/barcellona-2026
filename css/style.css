@@ -122,3 +122,10 @@ main{flex:1;min-height:0}.view{display:none;height:100%;overflow:auto}.view.acti
 .metro-action{display:flex!important;align-items:center!important;justify-content:center!important;width:26px!important;height:26px!important;box-sizing:border-box!important;border-width:2px!important;border-radius:50%!important;padding:0!important;font-size:0!important;}
 .metro-action-arrow{font-size:17px!important;line-height:1!important;}
 @media(max-width:600px){.metro-action-stack{transform:none!important}.metro-action{width:24px!important;height:24px!important}.metro-action-arrow{font-size:16px!important}}
+
+/* V13.5 */
+.hero-photo{position:relative;overflow:hidden;padding:0;background:#e8edf5;}
+.hero-img{width:100%;height:100%;object-fit:cover;display:block;}
+.hero-caption{position:absolute;left:0;right:0;bottom:0;padding:8px 12px;background:rgba(20,32,66,.72);color:#fff;font-size:12px;font-weight:800;text-align:left;}
+.hero-loading{padding:20px;text-align:center;color:#71809a;font-weight:850;}
+.metro-action-wrap{margin-left:0!important;}

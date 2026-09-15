@@ -13,7 +13,7 @@
   */
 
   const metroReal=L.layerGroup().addTo(map);
-  const metroActions=L.layerGroup().addTo(map); // V13.4 frecce metro compatte sul percorso
+  const metroActions=L.layerGroup().addTo(map); // V13.5 frecce metro compatte e selezionabili sul percorso
   const walkingReal=L.layerGroup().addTo(map);
   const liveFood=L.layerGroup().addTo(map);
   window.liveFood=liveFood; // v12: accessibile anche dalla console
@@ -94,7 +94,7 @@
         return `<span class="metro-action ${x.kind}" title="${x.kind==='up'?'Sali':'Scendi'} ${x.line}"><span class="metro-action-arrow">${arrow}</span></span>`;
       }).join('');
       const popup=items.map(x=>`<div><b>${x.kind==='up'?'⬆ SALI':'⬇ SCENDI'} ${x.line}</b>${x.kind==='up'&&x.destination?`<br>Direzione <b>${x.destination}</b>`:''}<br><span class="small">${x.segment}</span></div>`).join('<hr>');
-      const ic=L.divIcon({className:'metro-action-wrap',html:`<div class="metro-action-stack">${html}</div>`,iconSize:[34,34],iconAnchor:[17,17]});
+      const ic=L.divIcon({className:'metro-action-wrap',html:`<div class="metro-action-stack">${html}</div>`,iconSize:[34,34],iconAnchor:[-12,17]});
       L.marker([Number(station.lat),Number(station.lng)],{icon:ic,interactive:true,zIndexOffset:5000,pane:'markerPane'})
        .bindTooltip(station.name,{direction:'top',offset:[0,-24]})
        .bindPopup(`<div class="amenity-popup"><b>🚇 ${station.name}</b>${popup}</div>`)
@@ -515,6 +515,8 @@
 
   // Re-purpose visible toggles.
   const realMetroToggle=document.getElementById('toggleRealMetro');
+  const toggleMetroActions=document.getElementById('toggleMetroActions');
+  if(toggleMetroActions) toggleMetroActions.addEventListener('change',()=>{ if(toggleMetroActions.checked){ metroActions.addTo(map); renderMetroActions(currentDay()); } else { map.removeLayer(metroActions); } });
   if(realMetroToggle){
     const lab=realMetroToggle.closest('label');
     if(lab) lab.lastChild.textContent=' Metro reale + fermate';
