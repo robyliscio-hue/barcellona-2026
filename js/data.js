@@ -72,7 +72,8 @@ const TRIP_DATA={
           "lat": 41.39172,
           "lng": 2.16495,
           "description": "Scendendo a piedi lungo Passeig de Gracia, sosta esterna a Casa Batllo.",
-          "cost": "GRATIS - esterno"
+          "cost": "GRATIS - esterno",
+          "audios": "batllo"
         },
         {
           "id": "s-catalunya",
@@ -158,7 +159,8 @@ const TRIP_DATA={
           "lat": 41.38385,
           "lng": 2.18209,
           "description": "Attraversamento del Born con passaggio davanti a Santa Maria del Mar. Da qui si scende verso Passeig d'Isabel II sul lato corretto del Port Vell.",
-          "cost": "GRATIS - esterno"
+          "cost": "GRATIS - esterno",
+          "audios": "born"
         },
         {
           "id": "s-portvell-out",
@@ -1109,7 +1111,8 @@ const TRIP_DATA={
           "lat": 41.40052,
           "lng": 2.17937,
           "description": "Breve sosta esterna di circa 15-20 minuti all'ex arena monumentale. Nessun ingresso previsto.",
-          "cost": "GRATIS - esterno"
+          "cost": "GRATIS - esterno",
+          "audios": "monumental"
         },
         {
           "id": "d-glories",
@@ -1119,7 +1122,8 @@ const TRIP_DATA={
           "lat": 41.40399,
           "lng": 2.18789,
           "description": "Blocco dedicato alla Barcellona contemporanea: Torre Glories, Placa de les Glories e Disseny Hub, tutti dall'esterno.",
-          "cost": "GRATIS - esterni"
+          "cost": "GRATIS - esterni",
+          "audios": "glories"
         },
         {
           "id": "d-jaume",
@@ -1184,7 +1188,8 @@ const TRIP_DATA={
           "lat": 41.3852,
           "lng": 2.2011,
           "description": "Uscita lato mare della Ciutadella e prosecuzione verso Nova Icaria.",
-          "cost": "GRATIS"
+          "cost": "GRATIS",
+          "audios": "portolimpic"
         },
         {
           "id": "d-nova",
@@ -1194,7 +1199,8 @@ const TRIP_DATA={
           "lat": 41.39022,
           "lng": 2.20335,
           "description": "Blocco mare e spiaggia di circa tre ore, se meteo e condizioni del mare lo permettono.",
-          "cost": "GRATIS"
+          "cost": "GRATIS",
+          "audios": "portolimpic"
         },
         {
           "id": "d-barceloneta",
@@ -2688,6 +2694,132 @@ const AUDIO_LIBRARY={
     {
       "title": "00_PLACA_ESPANYA",
       "file": "audio/PLACA ESPANYA/00_PLACA_ESPANYA.mp3"
+    }
+  ],
+  "batllo": [
+    {
+      "title": "00_Casa_Batllo",
+      "file": "audio/Casa Batllo/00_Casa_Batllo.mp3"
+    }
+  ],
+  "born": [
+    {
+      "title": "00A - Entriamo nel Born",
+      "file": "audio/El Born e Santa Maria/00A - Entriamo nel Born.mp3"
+    },
+    {
+      "title": "00B - Il quartiere dei mercanti e degli artigiani",
+      "file": "audio/El Born e Santa Maria/00B - Il quartiere dei mercanti e degli artigiani.mp3"
+    },
+    {
+      "title": "00C - Passeggiando nel Born",
+      "file": "audio/El Born e Santa Maria/00C - Passeggiando nel Born.mp3"
+    },
+    {
+      "title": "00D - Arriviamo a Santa Maria del Mar",
+      "file": "audio/El Born e Santa Maria/00D - Arriviamo a Santa Maria del Mar.mp3"
+    },
+    {
+      "title": "00E - La storia di Santa Maria del Mar",
+      "file": "audio/El Born e Santa Maria/00E - La storia di Santa Maria del Mar.mp3"
+    },
+    {
+      "title": "00F - Osserviamo la basilica",
+      "file": "audio/El Born e Santa Maria/00F - Osserviamo la basilica.mp3"
+    },
+    {
+      "title": "00G - Il Fossar de les Moreres",
+      "file": "audio/El Born e Santa Maria/00G - Il Fossar de les Moreres.mp3"
+    },
+    {
+      "title": "00H - Lasciamo il Born",
+      "file": "audio/El Born e Santa Maria/00H - Lasciamo il Born.mp3"
+    }
+  ],
+  "monumental": [
+    {
+      "title": "00A - Arriviamo alla Monumental",
+      "file": "audio/La Monumental/00A - Arriviamo alla Monumental.mp3"
+    },
+    {
+      "title": "00B - La storia della Monumental",
+      "file": "audio/La Monumental/00B - La storia della Monumental.mp3"
+    },
+    {
+      "title": "00C - Osserviamo la facciata",
+      "file": "audio/La Monumental/00C - Osserviamo la facciata.mp3"
+    },
+    {
+      "title": "00D - L'ultima corrida",
+      "file": "audio/La Monumental/00D - L'ultima corrida.mp3"
+    },
+    {
+      "title": "00E - Non solo corride",
+      "file": "audio/La Monumental/00E - Non solo corride.mp3"
+    },
+    {
+      "title": "00F - Ultimo sguardo alla Monumental",
+      "file": "audio/La Monumental/00F - Ultimo sguardo alla Monumental.mp3"
+    }
+  ],
+  "glories": [
+    {
+      "title": "00A - Arriviamo a Glories",
+      "file": "audio/Glories e Torre Glories/00A - Arriviamo a Glories.mp3"
+    },
+    {
+      "title": "00B - Placa de les Glories",
+      "file": "audio/Glories e Torre Glories/00B - Placa de les Glories.mp3"
+    },
+    {
+      "title": "00C - Davanti alla Torre Glories",
+      "file": "audio/Glories e Torre Glories/00C - Davanti alla Torre Glories.mp3"
+    },
+    {
+      "title": "00D - La storia della Torre Glories",
+      "file": "audio/Glories e Torre Glories/00D - La storia della Torre Glories.mp3"
+    },
+    {
+      "title": "00E - Jean Nouvel e la forma della torre",
+      "file": "audio/Glories e Torre Glories/00E - Jean Nouvel e la forma della torre.mp3"
+    },
+    {
+      "title": "00F - Colori vetro e luce",
+      "file": "audio/Glories e Torre Glories/00F - Colori vetro e luce.mp3"
+    },
+    {
+      "title": "00G - Ultimo sguardo alla Torre Glories",
+      "file": "audio/Glories e Torre Glories/00G - Ultimo sguardo alla Torre Glories.mp3"
+    }
+  ],
+  "portolimpic": [
+    {
+      "title": "00A - Verso Nova Icaria",
+      "file": "audio/Port Olimpic e Nova Icaria/00A - Verso Nova Icaria.mp3"
+    },
+    {
+      "title": "00B - La spiaggia di Nova Icaria",
+      "file": "audio/Port Olimpic e Nova Icaria/00B - La spiaggia di Nova Icaria.mp3"
+    },
+    {
+      "title": "00C - La Barcellona delle Olimpiadi",
+      "file": "audio/Port Olimpic e Nova Icaria/00C - La Barcellona delle Olimpiadi.mp3"
+    },
+    {
+      "title": "00D - Entriamo nel Port Olimpic",
+      "file": "audio/Port Olimpic e Nova Icaria/00D - Entriamo nel Port Olimpic.mp3"
+    },
+    {
+      "title": "00E - Le due torri sul mare",
+      "file": "audio/Port Olimpic e Nova Icaria/00E - Le due torri sul mare.mp3"
+    },
+    {
+      "title": "00F - Il nuovo Port Olimpic",
+      "file": "audio/Port Olimpic e Nova Icaria/00F - Il nuovo Port Olimpic.mp3"
+    },
+    {
+      "title": "00G - Lasciamo il Port Olimpic",
+      "file": "audio/Port Olimpic e Nova Icaria/00G - Lasciamo il Port Olimpic.mp3"
     }
   ]
 };

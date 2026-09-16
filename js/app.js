@@ -69,11 +69,21 @@ function playlistHtml(itemId,audios){
  if(!audios||!audios.length)return `<div class="audio-box"><div class="audio-label">🎧 AUDIOGUIDA</div><div class="stop-meta">Nessuna audioguida associata a questa tappa.</div></div>`;
  return `<div class="audio-box"><div class="audio-label">🎧 AUDIOGUIDA · ${audios.length} ${audios.length===1?'TRACCIA':'TRACCE'}</div><div class="playlist">${audios.map((a,i)=>{const l=localStorage.getItem(trackKey(itemId,i))==='1';return `<button class="track-row ${l?'listened':''}" onclick="selectTrack('${itemId}',${i})"><span class="track-play">▶</span><span class="track-title">${a.title}</span><span class="track-state">${l?'✓':''}</span></button>`}).join('')}</div><div id="activeTrackBox" class="active-track" hidden><div id="activeTrackTitle" class="active-track-title"></div><audio id="mainAudioPlayer" controls preload="metadata"></audio></div></div>`;
 }
+const LOCAL_PHOTOS={
+  's-rambla':'img/tappe/la-rambla.jpg',
+  's-portvell-in':'img/tappe/port-vell-ingresso-colombo.jpg',
+  's-portvell-out':'img/tappe/port-vell-verso-barceloneta.jpg',
+  's-barceloneta':'img/tappe/barceloneta-spiaggia.avif',
+  'd-nova':'img/tappe/platja-nova-icaria.jpg',
+  'd-barceloneta':'img/tappe/barceloneta-spiaggia.avif'
+};
 const PHOTO_TITLES={
   's-pedrera':'Casa Milà','s-batllo':'Casa Batlló','s-catalunya':'Plaça de Catalunya','s-rambla':'La Rambla (Barcellona)','s-boqueria':'La Boqueria','s-reial':'Plaça Reial','s-colombo':'Monumento a Cristoforo Colombo (Barcellona)','s-portvell':'Port Vell','s-gotic':'Barri Gòtic','s-born':'El Born','s-santamaria':'Santa Maria del Mar','s-barceloneta':'Barceloneta','d-sagrada':'Sagrada Família','d-glories':'Torre Glòries','d-cattedrale':'Cattedrale di Barcellona','d-arc':'Arc de Triomf (Barcellona)','d-ciutadella':'Parco della Cittadella','d-portolimpic':'Port Olímpic','d-novaicaria':'Platja de la Nova Icària','l-campnou':'Camp Nou'
 };
 function loadStopPhoto(stop){
   const hero=document.getElementById('heroPhoto'); if(!hero) return;
+  const localSrc=LOCAL_PHOTOS[stop.id];
+  if(localSrc){ hero.innerHTML='<img class="hero-img" alt="'+stop.name.replace(/"/g,'&quot;')+'" src="'+localSrc+'"><div class="hero-caption">'+stop.name+'</div>'; return; }
   const title=PHOTO_TITLES[stop.id]||stop.name;
   const url='https://it.wikipedia.org/w/api.php?action=query&origin=*&format=json&prop=pageimages&piprop=original&pithumbsize=1200&titles='+encodeURIComponent(title);
   fetch(url).then(r=>r.json()).then(j=>{

@@ -1,4 +1,4 @@
-V13.5 - Frecce metro affiancate e selezionabili + foto location nelle schede tappa.
+V13.6 - Audio nuove integrate + foto locali fornite + frecce metro affiancate e selezionabili.
 
 V13.4 - Frecce metro compatte + coordinate ristoranti corrette.
 

@@ -13,7 +13,7 @@
   */
 
   const metroReal=L.layerGroup().addTo(map);
-  const metroActions=L.layerGroup().addTo(map); // V13.5 frecce metro compatte e selezionabili sul percorso
+  const metroActions=L.layerGroup().addTo(map); // V13.6 frecce metro compatte e selezionabili sul percorso
   const walkingReal=L.layerGroup().addTo(map);
   const liveFood=L.layerGroup().addTo(map);
   window.liveFood=liveFood; // v12: accessibile anche dalla console
@@ -583,7 +583,7 @@
     const el=document.getElementById('liveStatus');
     if(m){
       const src=results[0].value && results[0].value.source==='snapshot-v12' ? 'snapshot v12' : (results[0].value && results[0].value.source==='cache' ? 'cache locale' : 'dati OSM');
-      el.innerHTML='✓ V13.3 locale · Metro '+src+' · percorsi a piedi · fast food precaricati';
+      el.innerHTML='✓ V13.6 locale · Metro '+src+' · percorsi a piedi · fast food precaricati';
     }else{
       el.innerHTML='Metro: serve una prima connessione per creare la cache locale';
     }
