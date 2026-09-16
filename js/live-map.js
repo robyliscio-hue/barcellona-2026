@@ -124,7 +124,7 @@
     'Barceloneta','Passeig de Gràcia','Passeig de Gracia','Collblanc'
   ];
   const usedKey=new Set(USED_STATIONS.map(x=>norm(x)));
-  // V13.7: coordinate OSM reali scelte per ciascuna stazione usata.
+  // V13.8: coordinate OSM reali scelte per ciascuna stazione usata.
   // Le frecce si agganciano qui senza spostare la M.
   const metroStationCoords=new Map();
 
@@ -277,7 +277,7 @@
       });
     });
 
-    // V13.7: una sola M per stazione. I dati OSM possono contenere più stop/platform
+    // V13.8: una sola M per stazione. I dati OSM possono contenere più stop/platform
     // con lo stesso nome; non mostriamo quindi M duplicate o traslate per far spazio alle frecce.
     const itineraryTargets=new Map();
     (TRIP_DATA.days||[]).forEach(d=>(d.metro||[]).forEach(seg=>(seg.stations||[]).forEach(st=>{

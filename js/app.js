@@ -26,7 +26,10 @@ function renderDay(day){
  day.metro.forEach(x=>L.polyline(x.coords,{color:x.color,weight:7,opacity:.72,lineCap:'round'}).bindTooltip(x.name,{sticky:true}).addTo(metroLayer));
  day.walk.forEach(x=>L.polyline(x,{color:'#2d67b1',weight:4,opacity:.82,dashArray:'8,8',lineCap:'round'}).addTo(walkLayer));
 
+ // V13.8: le fermate/cambi metro NON sono più marker di tappa sulla mappa.
+ // Restano nella lista operativa, mentre sulla mappa usiamo solo metro reale + frecce SALI/SCENDI.
  day.stops.forEach(s=>{
+   if(s.kind==='metro') return;
    const m=L.marker([s.lat,s.lng],{icon:iconFor(s)}).addTo(stopsLayer);
    m.bindTooltip(s.name,{direction:'top',offset:[0,-14]});m.on('click',()=>openStop(s));markerMap.set(s.id,m);
  });

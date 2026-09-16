@@ -1,5 +1,1 @@
-V13.7 - Fermate metro compatte su coordinate OSM reali, una sola M per stazione; frecce indipendenti e disattivabili.
-
-V13.4 - Frecce metro compatte + coordinate ristoranti corrette.
-
-V13.3 - SALI/SCENDI metro espliciti e sempre visibili + WC statici lungo itinerario.\n\nMetro e percorsi a piedi sono inglobati nel sito. I badge metro mostrano linea e direzione nei punti di salita/discesa.\n
+V13.8 - Rimossi dalla mappa i marker tappa delle fermate/cambi metro. Restano solo M reali OSM e frecce sali/scendi, entrambe gestibili da checkbox. Le fermate restano nella lista Tappe per conservare le indicazioni operative.
