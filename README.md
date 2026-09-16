@@ -1,4 +1,4 @@
-V13.6 - Audio nuove integrate + foto locali fornite + frecce metro affiancate e selezionabili.
+V13.7 - Fermate metro compatte su coordinate OSM reali, una sola M per stazione; frecce indipendenti e disattivabili.
 
 V13.4 - Frecce metro compatte + coordinate ristoranti corrette.
 

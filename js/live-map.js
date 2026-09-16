@@ -94,8 +94,9 @@
         return `<span class="metro-action ${x.kind}" title="${x.kind==='up'?'Sali':'Scendi'} ${x.line}"><span class="metro-action-arrow">${arrow}</span></span>`;
       }).join('');
       const popup=items.map(x=>`<div><b>${x.kind==='up'?'⬆ SALI':'⬇ SCENDI'} ${x.line}</b>${x.kind==='up'&&x.destination?`<br>Direzione <b>${x.destination}</b>`:''}<br><span class="small">${x.segment}</span></div>`).join('<hr>');
-      const ic=L.divIcon({className:'metro-action-wrap',html:`<div class="metro-action-stack">${html}</div>`,iconSize:[34,34],iconAnchor:[-12,17]});
-      L.marker([Number(station.lat),Number(station.lng)],{icon:ic,interactive:true,zIndexOffset:5000,pane:'markerPane'})
+      const stationCoord=metroStationCoords.get(norm(station.name)) || [Number(station.lat),Number(station.lng)];
+      const ic=L.divIcon({className:'metro-action-wrap',html:`<div class="metro-action-stack">${html}</div>`,iconSize:[28,28],iconAnchor:[-8,14]});
+      L.marker(stationCoord,{icon:ic,interactive:true,zIndexOffset:5000,pane:'markerPane'})
        .bindTooltip(station.name,{direction:'top',offset:[0,-24]})
        .bindPopup(`<div class="amenity-popup"><b>🚇 ${station.name}</b>${popup}</div>`)
        .addTo(metroActions);
@@ -123,6 +124,9 @@
     'Barceloneta','Passeig de Gràcia','Passeig de Gracia','Collblanc'
   ];
   const usedKey=new Set(USED_STATIONS.map(x=>norm(x)));
+  // V13.7: coordinate OSM reali scelte per ciascuna stazione usata.
+  // Le frecce si agganciano qui senza spostare la M.
+  const metroStationCoords=new Map();
 
   function norm(s){
     return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
@@ -273,34 +277,55 @@
       });
     });
 
-    // Route stop nodes: every station encountered in all metro relations.
-    const plotted=new Set();
+    // V13.7: una sola M per stazione. I dati OSM possono contenere più stop/platform
+    // con lo stesso nome; non mostriamo quindi M duplicate o traslate per far spazio alle frecce.
+    const itineraryTargets=new Map();
+    (TRIP_DATA.days||[]).forEach(d=>(d.metro||[]).forEach(seg=>(seg.stations||[]).forEach(st=>{
+      if(st && st.name && Number.isFinite(Number(st.lat)) && Number.isFinite(Number(st.lng)))
+        itineraryTargets.set(norm(st.name),[Number(st.lat),Number(st.lng)]);
+    })));
+
+    const groups=new Map();
     stopLines.forEach((lines,id)=>{
       const n=nodes.get(id);
       if(!n || n.lat==null || n.lon==null) return;
       const name=(n.tags&&(n.tags.name||n.tags['name:ca']||n.tags['name:es']))||'Fermata metro';
       const key=norm(name);
-      const coordKey=key+'|'+n.lat.toFixed(4)+'|'+n.lon.toFixed(4);
-      if(plotted.has(coordKey)) return;
-      plotted.add(coordKey);
+      if(!groups.has(key)) groups.set(key,{name,candidates:[],lines:new Set()});
+      const g=groups.get(key);
+      g.candidates.push(n);
+      lines.forEach(x=>g.lines.add(x));
+    });
 
-      const refs=[...lines].sort();
-      const main=refs[0]||'';
+    metroStationCoords.clear();
+    groups.forEach((g,key)=>{
+      const refs=[...g.lines].sort();
       const used=usedKey.has(key);
+      let chosen=g.candidates[0];
+      const target=itineraryTargets.get(key);
+      if(target && g.candidates.length>1){
+        chosen=g.candidates.reduce((best,n)=>{
+          const d=(n.lat-target[0])**2+(n.lon-target[1])**2;
+          const bd=(best.lat-target[0])**2+(best.lon-target[1])**2;
+          return d<bd?n:best;
+        },chosen);
+      }
+      if(used) metroStationCoords.set(key,[chosen.lat,chosen.lon]);
+
       const badges=refs.map(r=>`<span class="line-badge" style="background:${colorFor(r)}">${r}</span>`).join('');
       const html=used
         ? `<div class="metro-stop-v11 used"><span class="metro-symbol">M</span><span class="metro-lines">${badges}</span></div>`
         : `<div class="metro-stop-v11 minor" title="Fermata metro"></div>`;
       const icon=L.divIcon({
-        className:'',
-        html,
-        iconSize:used?[68,28]:[9,9],
-        iconAnchor:used?[14,14]:[4,4]
+        className:'', html,
+        iconSize:used?[52,22]:[8,8],
+        iconAnchor:used?[10,11]:[4,4]
       });
-      L.marker([n.lat,n.lon],{icon})
-       .bindPopup(`<div class="amenity-popup"><b>🚇 ${name}</b><div class="small">${refs.join(' · ')}</div><div>${used?'Fermata prevista nel nostro itinerario.':'Fermata disponibile, non prevista nel piano.'}</div></div>`)
+      L.marker([chosen.lat,chosen.lon],{icon})
+       .bindPopup(`<div class="amenity-popup"><b>🚇 ${g.name}</b><div class="small">${refs.join(' · ')}</div><div>${used?'Fermata prevista nel nostro itinerario.':'Fermata disponibile, non prevista nel piano.'}</div></div>`)
        .addTo(metroReal);
     });
+
   }
 
   const METRO_CACHE_KEY='barcellona.metro.osm.v11';
@@ -352,9 +377,9 @@
       return {source:'snapshot-v12',savedAt:Date.now()};
     }
     const cached=readMetroCache();
-    if(cached){ renderMetroData(cached.data); return {source:'cache',savedAt:cached.savedAt}; }
+    if(cached){ renderMetroData(cached.data); renderMetroActions(currentDay()); return {source:'cache',savedAt:cached.savedAt}; }
     const data=await fetchMetroSnapshot();
-    writeMetroCache(data); renderMetroData(data);
+    writeMetroCache(data); renderMetroData(data); renderMetroActions(currentDay());
     return {source:'network',savedAt:Date.now()};
   }
 
