@@ -32,7 +32,9 @@
 <main>
 <section id="mapView" class="view active">
   <div id="map"></div>
-  <div class="layer-panel">
+  <button id="layerPanelToggle" class="layer-panel-toggle" type="button" aria-expanded="false" aria-controls="layerPanel">☰ Livelli</button>
+  <div id="layerPanel" class="layer-panel">
+    <button id="layerPanelClose" class="layer-panel-close" type="button" aria-label="Chiudi livelli">×</button>
     <label><input type="checkbox" id="toggleWalk" checked> A piedi</label>
     <label><input type="checkbox" id="toggleMetro" checked> Metro</label>
     <label><input type="checkbox" id="toggleStops" checked> Tappe</label>
@@ -61,4 +63,21 @@
 <script src="js/app.js"></script>
 <script src="js/v12-snapshot.js"></script>
 <script src="js/live-map.js"></script>
+<script>
+(function(){
+  const panel=document.getElementById("layerPanel");
+  const toggle=document.getElementById("layerPanelToggle");
+  const close=document.getElementById("layerPanelClose");
+  if(!panel||!toggle||!close)return;
+  const desktop=window.matchMedia("(min-width:800px)");
+  function setOpen(open){
+    panel.classList.toggle("open",open);
+    toggle.setAttribute("aria-expanded",open?"true":"false");
+    toggle.textContent=open?"✕ Livelli":"☰ Livelli";
+  }
+  setOpen(desktop.matches);
+  toggle.addEventListener("click",()=>setOpen(!panel.classList.contains("open")));
+  close.addEventListener("click",()=>setOpen(false));
+})();
+</script>
 </body></html>
