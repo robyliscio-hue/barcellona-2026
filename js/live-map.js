@@ -526,6 +526,33 @@
   }
 
 
+
+
+  // V14 - POI extra selezionati vicino ai percorsi reali. Statici/offline, disattivati di default.
+  const extraPoiLayer=L.layerGroup();
+  const EXTRA_POIS=[
+    {name:'Palau de la Música Catalana',lat:41.38758,lng:2.17522,kind:'Modernismo',access:'ESTERNO GRATIS · interno a pagamento',note:'Capolavoro modernista di Lluís Domènech i Montaner, Patrimonio UNESCO. Vale uno sguardo alla facciata se siete in zona Urquinaona/Via Laietana.'},
+    {name:'Temple d’August',lat:41.38342,lng:2.17719,kind:'Barcellona romana',access:'GRATIS',note:'Quattro colonne romane di oltre duemila anni nascoste in Carrer del Paradís, nel cuore del Gòtic.'},
+    {name:'Plaça de Sant Felip Neri',lat:41.3834509,lng:2.1750185,kind:'Piazza storica',access:'GRATIS',note:'Piccola piazza del Gòtic; sulla facciata della chiesa sono ancora visibili le cicatrici del bombardamento del 1938.'},
+    {name:'Fossar de les Moreres',lat:41.383747,lng:2.182385,kind:'Memoriale storico',access:'GRATIS',note:'Accanto a Santa Maria del Mar: memoriale dedicato ai caduti dell’assedio di Barcellona del 1714.'},
+    {name:'Born Centre de Cultura i Memòria',lat:41.38540,lng:2.18410,kind:'Architettura e storia',access:'EDIFICIO / area visibile; mostre secondo programma',note:'L’antico Mercat del Born conserva nel suo interno il sito archeologico della Barcellona del 1700.'},
+    {name:'Estació de França',lat:41.38439,lng:2.18525,kind:'Architettura ferroviaria',access:'GRATIS area stazione',note:'Stazione monumentale inaugurata nell’attuale edificio per l’Esposizione del 1929; è a pochi passi dal Born e dalla Ciutadella.'},
+    {name:'Cascada Monumental',lat:41.39013,lng:2.18654,kind:'Monumento nel parco',access:'GRATIS',note:'La grande fontana monumentale della Ciutadella, realizzata nel contesto della trasformazione del parco per l’Esposizione del 1888.'},
+    {name:'Hivernacle de la Ciutadella',lat:41.38872,lng:2.18504,kind:'Architettura del 1888',access:'GRATIS secondo orari',note:'Serra storica in ferro e vetro del Parc de la Ciutadella, restaurata e riaperta come spazio patrimoniale.'}
+  ];
+  function renderExtraPois(){
+    extraPoiLayer.clearLayers();
+    EXTRA_POIS.forEach(p=>{
+      const icon=L.divIcon({className:'extra-poi-wrap',html:'<div class="extra-poi-marker">★</div>',iconSize:[24,24],iconAnchor:[12,12]});
+      const dest=`${p.lat},${p.lng}`;
+      L.marker([p.lat,p.lng],{icon})
+       .bindTooltip(p.name,{direction:'top',offset:[0,-10]})
+       .bindPopup(`<div class="amenity-popup extra-poi-popup"><b>★ ${p.name}</b><div class="small">${p.kind}</div><div style="margin-top:6px">${p.note}</div><div style="margin-top:6px"><b>Accesso:</b> ${p.access}</div><a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${dest}">🧭 Portami qui</a></div>`)
+       .addTo(extraPoiLayer);
+    });
+  }
+  renderExtraPois();
+
   // Disable/remove old schematic layers completely.
   if(map.hasLayer(metroLayer)) map.removeLayer(metroLayer);
   if(map.hasLayer(walkLayer)) map.removeLayer(walkLayer);
@@ -547,6 +574,8 @@
     if(lab) lab.lastChild.textContent=' Metro reale + fermate';
     realMetroToggle.onchange=e=>e.target.checked?metroReal.addTo(map):map.removeLayer(metroReal);
   }
+  const extraPoiToggle=document.getElementById('toggleExtraPoi');
+  if(extraPoiToggle) extraPoiToggle.onchange=e=>e.target.checked?extraPoiLayer.addTo(map):map.removeLayer(extraPoiLayer);
   const foodToggle=document.getElementById('toggleLiveFood');
   if(foodToggle) foodToggle.onchange=e=>e.target.checked?liveFood.addTo(map):map.removeLayer(liveFood);
   const nearbyToggle=document.getElementById('toggleLiveNearby');
@@ -608,7 +637,7 @@
     const el=document.getElementById('liveStatus');
     if(m){
       const src=results[0].value && results[0].value.source==='snapshot-v12' ? 'snapshot v12' : (results[0].value && results[0].value.source==='cache' ? 'cache locale' : 'dati OSM');
-      el.innerHTML='✓ V13.6 locale · Metro '+src+' · percorsi a piedi · fast food precaricati';
+      el.innerHTML='✓ V14.0 locale · Metro '+src+' · percorsi a piedi · POI extra offline';
     }else{
       el.innerHTML='Metro: serve una prima connessione per creare la cache locale';
     }

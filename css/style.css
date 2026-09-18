@@ -141,3 +141,10 @@ main{flex:1;min-height:0}.view{display:none;height:100%;overflow:auto}.view.acti
 @media(max-width:600px){.metro-stop-v11.used .metro-symbol{width:17px!important;height:17px!important;flex-basis:17px!important;font-size:9px!important}.metro-action{width:21px!important;height:21px!important}.metro-action-arrow{font-size:13px!important}}
 
 @media(min-width:800px){.layer-panel-toggle{display:none}.layer-panel{top:166px;padding:8px 10px}.layer-panel-close{display:none}}
+
+
+/* V14 - punti di interesse extra, volutamente discreti */
+.extra-poi-wrap{background:transparent!important;border:0!important;}
+.extra-poi-marker{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff;border:2px solid #9b6a18;color:#9b6a18;font-size:11px;font-weight:900;box-shadow:0 1px 4px rgba(0,0,0,.28);}
+.extra-poi-popup .small{margin-top:2px;color:#68748a;font-weight:700;}
+@media(max-width:600px){.extra-poi-marker{width:18px;height:18px;font-size:10px}}
