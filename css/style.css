@@ -148,3 +148,7 @@ main{flex:1;min-height:0}.view{display:none;height:100%;overflow:auto}.view.acti
 .extra-poi-marker{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff;border:2px solid #9b6a18;color:#9b6a18;font-size:11px;font-weight:900;box-shadow:0 1px 4px rgba(0,0,0,.28);}
 .extra-poi-popup .small{margin-top:2px;color:#68748a;font-weight:700;}
 @media(max-width:600px){.extra-poi-marker{width:18px;height:18px;font-size:10px}}
+
+/* V14.1 - Bombers de Barcelona */
+.fire-station-marker{width:30px;height:30px;border-radius:50%;background:#fff;border:2px solid #c62828;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.fire-station-wrap{background:transparent;border:0}

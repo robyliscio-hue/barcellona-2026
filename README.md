@@ -1,5 +1,9 @@
-V14.0 - Layer POI extra offline, selezionabile e disattivato di default.
+V14.1 - Layer Caserme Vigili del Fuoco / Bombers de Barcelona.
 
-V13.9 - Pannello livelli collassabile su smartphone. Parte chiuso e resta disponibile tramite pulsante Livelli; su desktop resta aperto. Mantiene tutte le checkbox della V13.8.
-
-V13.8 - Rimossi dalla mappa i marker tappa delle fermate/cambi metro. Restano solo M reali OSM e frecce sali/scendi, entrambe gestibili da checkbox. Le fermate restano nella lista Tappe per conservare le indicazioni operative.
+Novita rispetto alla V14.0:
+- nuovo layer "Caserme Vigili del Fuoco" selezionabile dal pannello Livelli;
+- disattivato di default;
+- 7 parchi Bombers de Barcelona precaricati e disponibili offline;
+- marker dedicato con popup, indirizzo, 112 e pulsante Portami qui;
+- mantenuti POI extra, metro, percorsi, audio, immagini e tutti gli altri layer della V14.0;
+- cache Service Worker aggiornata a V14.1.

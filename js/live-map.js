@@ -574,8 +574,33 @@
     if(lab) lab.lastChild.textContent=' Metro reale + fermate';
     realMetroToggle.onchange=e=>e.target.checked?metroReal.addTo(map):map.removeLayer(metroReal);
   }
+  // V14.1 - Parchi operativi Bombers de Barcelona. Statici/offline, disattivati di default.
+  const fireStationsLayer=L.layerGroup();
+  const FIRE_STATIONS=[
+    {name:'Parc de Bombers de l’Eixample',lat:41.3788,lng:2.1494,address:'Carrer d’Aragó, 2',note:'Sede provvisoria nel Parc de Joan Miró.'},
+    {name:'Parc de Bombers de Montjuïc',lat:41.37159,lng:2.173799,address:'Passeig de Josep Carner, 48-56'},
+    {name:'Parc de Bombers de Llevant',lat:41.405186,lng:2.198119,address:'Carrer de Castella, 6-16'},
+    {name:'Parc de Bombers de Sant Andreu',lat:41.43731,lng:2.18124,address:'Avinguda de Rio de Janeiro, 68-72'},
+    {name:'Parc de Bombers de la Vall d’Hebron',lat:41.4243,lng:2.14309,address:'Carrer de Coll i Alentorn, 5'},
+    {name:'Parc de Bombers de la Zona Franca',lat:41.34391,lng:2.14388,address:'Carrer 60, 8-10, Zona Franca'},
+    {name:'Parc de Bombers de Vallvidrera',lat:41.41699,lng:2.11757,address:'Carretera de Vallvidrera a Barcelona, 43-53',note:'Distaccamento di Vallvidrera.'}
+  ];
+  function renderFireStations(){
+    fireStationsLayer.clearLayers();
+    FIRE_STATIONS.forEach(p=>{
+      const icon=L.divIcon({className:'fire-station-wrap',html:'<div class="fire-station-marker">🚒</div>',iconSize:[30,30],iconAnchor:[15,15]});
+      L.marker([p.lat,p.lng],{icon})
+       .bindTooltip(p.name,{direction:'top',offset:[0,-12]})
+       .bindPopup(`<div class="amenity-popup"><b>🚒 ${p.name}</b><div class="small">Bombers de Barcelona</div><div style="margin-top:6px">${p.address}</div>${p.note?`<div style="margin-top:6px">${p.note}</div>`:''}<div style="margin-top:6px"><b>Emergenze:</b> 112</div><a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}">🧭 Portami qui</a></div>`)
+       .addTo(fireStationsLayer);
+    });
+  }
+  renderFireStations();
+
   const extraPoiToggle=document.getElementById('toggleExtraPoi');
   if(extraPoiToggle) extraPoiToggle.onchange=e=>e.target.checked?extraPoiLayer.addTo(map):map.removeLayer(extraPoiLayer);
+  const fireStationsToggle=document.getElementById('toggleFireStations');
+  if(fireStationsToggle) fireStationsToggle.onchange=e=>e.target.checked?fireStationsLayer.addTo(map):map.removeLayer(fireStationsLayer);
   const foodToggle=document.getElementById('toggleLiveFood');
   if(foodToggle) foodToggle.onchange=e=>e.target.checked?liveFood.addTo(map):map.removeLayer(liveFood);
   const nearbyToggle=document.getElementById('toggleLiveNearby');
